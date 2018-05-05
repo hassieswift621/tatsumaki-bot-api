@@ -1,11 +1,13 @@
 Tatsumaki Bot API
 =================
+[![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api)
+
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
 
 Currently, the API allows you to fetch user profile data.
 
 Note that I am in no way connected with the Tatsumaki Bot and their devs.
-If you have any queries about bot itself, please visit https://tatsumaki.xyz/
+If you have any queries about the bot itself, please visit https://tatsumaki.xyz/
 
 How do I get an API key
 -----------------------
