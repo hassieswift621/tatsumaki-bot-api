@@ -19,14 +19,14 @@ This library is available on JCenter <sup>Soon&#8482;</sup>
 
 **Gradle Setup**
 ```gradle
-implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumakibot:0.1.0'
+implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.1.0'
 ```
 
 **Maven Setup**
 ```maven
 <dependency>
   <groupId>uk.co.hassieswift621.libraries.discord.api</groupId>
-  <artifactId>tatsumakibot</artifactId>
+  <artifactId>tatsumaki-bot</artifactId>
   <version>0.1.0</version>
   <type>pom</type>
 </dependency>
