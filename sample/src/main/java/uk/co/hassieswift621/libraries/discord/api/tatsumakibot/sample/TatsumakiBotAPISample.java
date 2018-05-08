@@ -16,9 +16,7 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.sample;
 
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.ClientBuilder;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.ResponseCallback;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.TatsumakiClient;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.*;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUser;
 
 /**
@@ -33,22 +31,15 @@ public class TatsumakiBotAPISample {
                 .setAPIKey("YOUR TATSUMAKI BOT API KEY")
                 .build();
 
-        // Get tatsumaki profile data for a user.
-        tatsumakiClient.getUser("USER ID", new ResponseCallback() {
-            @Override
-            public void onSuccess(TatsumakiUser user) {
-                // Success, output some stuff.
-                System.out.println("User's Rank: " + user.getRank());
-                System.out.println("User's Reputation: " + user.getReputation());
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
+        // Get user profile data.
+        tatsumakiClient.getUser("USER ID",
+                user -> {
+                    // Success, output some stuff.
+                    System.out.println("User's Rank: " + user.getRank());
+                    System.out.println("User's Reputation: " + user.getReputation());
+                },
                 // Output error message.
-                throwable.printStackTrace();
-            }
-        });
-
+                Throwable::printStackTrace
+        );
     }
-
 }

@@ -14,11 +14,11 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter. The current version is 0.1.0.
+This library is available on JCenter. The current version is 0.2.0.
 
 **Gradle Setup**
 ```gradle
-implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.1.0'
+implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.2.0'
 ```
 
 **Maven Setup**
@@ -39,24 +39,26 @@ TatsumakiClient tatsumakiClient = new ClientBuilder()
     .setAPIKey("YOUR TATSUMAKI BOT API KEY")
     .build();
 
+// Request to get user profile data.
+tatsumakiClient.getUser("User ID",
+    user -> {
+        
+    }
+)
+
 // Request for user profile data for a user.
 tatsumakiClient.getUser("User ID", new ResponseCallback() {
-    @Override
-    public void onSuccess(TatsumakiUser user) {
-        // Request successful.
-        // Do stuff with the data here.
-        System.out.println("User's rank: " + user.getRank())
+    user -> {
+        // Success, output some stuff.
+        System.out.println("User's Rank: " + user.getRank());
+        System.out.println("User's Reputation: " + user.getReputation());
+    },
+    // Output error message.
+    Throwable::printStackTrace
     }
-    
-    @Override
-    public void onFailure(Throwable throwable) {
-        // Error occurred. Handle error here.
-        throwable.printStackTrace();
-    }
-});
 
 // Do other stuff here if required while the above request
-// is executed if required.
+// is executed.
 ```
 
 License

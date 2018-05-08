@@ -45,17 +45,101 @@ class TatsumakiClientImpl implements TatsumakiClient {
     }
 
     @Override
+    public void getUser(long userId, IResponse response, IError error) {
+        final String ENDPOINT_URL = "users/";
+        sendResponse(ENDPOINT_URL + userId, response, error);
+    }
+
+    @Override
+    public void getUser(String userId, IResponse response, IError error) {
+        final String ENDPOINT_URL = "users/";
+        sendResponse(ENDPOINT_URL + userId, response, error);
+    }
+
+    private void sendResponse(String requestURL, IResponse responseCallback, IError errorCallback) {
+
+        // Create async threader.
+        AsyncThreader asyncThreader = new AsyncThreader.Builder()
+                .setThreadPoolSize(1)
+                .build();
+
+        Request<JSONObject> request = new Request<>(
+                () -> {
+
+                    try {
+
+                        // Get JSON.
+                        OkHttpClient httpClient = new OkHttpClient();
+                        okhttp3.Request httpRequest = new okhttp3.Request.Builder()
+                                .url(BASE_URL + requestURL)
+                                .addHeader("Authorization", apiKey)
+                                .get()
+                                .build();
+
+                        Response response = httpClient.newCall(httpRequest).execute();
+
+                        // Convert input stream to JSON object.
+                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+
+                        int length = response.body().byteStream().read(buffer);
+                        while (length != -1) {
+                            outputStream.write(buffer, 0, length);
+                            length = response.body().byteStream().read(buffer);
+                        }
+
+                        return new JSONObject(outputStream.toString("UTF-8"));
+
+                    } catch (IOException e) {
+                        throw new TatsumakiIOException("Tatsumaki Bot API IO Exception - Failed to get response", e);
+                    } catch (JSONException e) {
+                        throw new TatsumakiJSONException("Tatsumaki Bot API JSON Exception - Failed to parse response", e);
+                    }
+                },
+                new Callback<JSONObject>() {
+                    @Override
+                    public void onSuccess(JSONObject response) {
+
+                        // Execute the callback and shutdown the async threader.
+                        try {
+                            TatsumakiUser tatsumakiUser = new TatsumakiUserImpl(response);
+                            responseCallback.onResponse(tatsumakiUser);
+                        } catch (TatsumakiJSONException e) {
+                            errorCallback.onError(e);
+                        }
+
+                        asyncThreader.shutdown();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        // Execute the callback and shutdown the async threader.
+                        errorCallback.onError(throwable);
+                        asyncThreader.shutdown();
+                    }
+                }
+        );
+
+        // Execute the task.
+        asyncThreader.execute(request);
+
+    }
+
+    @Deprecated
+    @Override
     public void getUser(long userId, ResponseCallback callback) {
         final String ENDPOINT_URL = "users/";
         sendResponse(ENDPOINT_URL + userId, callback);
     }
 
+    @Deprecated
     @Override
     public void getUser(String userId, ResponseCallback callback) {
         final String ENDPOINT_URL = "users/";
         sendResponse(ENDPOINT_URL + userId, callback);
     }
 
+    @Deprecated
     private void sendResponse(String requestURL, ResponseCallback callback) {
 
         // Create async threader.

@@ -21,8 +21,14 @@ package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
  */
 public interface TatsumakiClient {
 
+    void getUser(long userId, IResponse response, IError error);
+
+    void getUser(String userId, IResponse response, IError error);
+
+    @Deprecated
     void getUser(long userId, ResponseCallback callback);
 
+    @Deprecated
     void getUser(String userId, ResponseCallback callback);
 
 }

@@ -18,9 +18,12 @@ package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
 
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUser;
 
+
+
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 16:10.
  */
+@Deprecated
 public interface ResponseCallback {
 
     void onSuccess(TatsumakiUser user);
