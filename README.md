@@ -15,7 +15,7 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter <sup>Soon&#8482;</sup>
+This library is available on JCenter. The current version is 0.1.0.
 
 **Gradle Setup**
 ```gradle
