@@ -48,3 +48,6 @@ gradle-app.setting
 .idea/uiDesigner.xml
 .idea/copyright/profiles_settings.xml
 .idea/copyright/Open_Source_Library.xml
+.idea/workspace.xml
+.idea/compiler.xml
+.idea/encodings.xml
