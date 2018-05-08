@@ -1,6 +1,5 @@
-Tatsumaki Bot API
+Tatsumaki Bot API [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki-bot/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki-bot/_latestVersion)
 =================
-[![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api)
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
 
