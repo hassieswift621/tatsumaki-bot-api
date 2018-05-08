@@ -40,7 +40,7 @@ TatsumakiClient tatsumakiClient = new ClientBuilder()
     .build();
 
 // Request for user profile data for a user.
-tatsumakiClient.getUser("User ID", new ResponseCallback() {
+tatsumakiClient.getUser("User ID",
     user -> {
         // Success, output some stuff.
         System.out.println("User's Rank: " + user.getRank());
@@ -48,7 +48,7 @@ tatsumakiClient.getUser("User ID", new ResponseCallback() {
     },
     // Output error message.
     Throwable::printStackTrace
-    }
+}
 
 // Do other stuff here if required while the above request
 // is executed.
