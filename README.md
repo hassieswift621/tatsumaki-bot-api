@@ -26,7 +26,7 @@ implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.2.0'
 <dependency>
   <groupId>uk.co.hassieswift621.libraries.discord.api</groupId>
   <artifactId>tatsumaki-bot</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -38,13 +38,6 @@ Tutorial
 TatsumakiClient tatsumakiClient = new ClientBuilder()
     .setAPIKey("YOUR TATSUMAKI BOT API KEY")
     .build();
-
-// Request to get user profile data.
-tatsumakiClient.getUser("User ID",
-    user -> {
-        
-    }
-)
 
 // Request for user profile data for a user.
 tatsumakiClient.getUser("User ID", new ResponseCallback() {
