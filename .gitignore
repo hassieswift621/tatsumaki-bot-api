@@ -42,7 +42,3 @@ gradle-app.setting
 # IntelliJ
 *.iml
 .idea/
-*.iml
-.idea/modules.xml
-tatsumaki-bot-api.iml
-.idea/modules.xml
