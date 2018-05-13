@@ -43,6 +43,7 @@ public class TatsumakiUserImpl implements TatsumakiUser {
 
     public TatsumakiUserImpl(JSONObject json) throws TatsumakiJSONException {
 
+        System.out.println(json);
         try {
 
             avatar = json.getString("avatar_url");
@@ -61,8 +62,8 @@ public class TatsumakiUserImpl implements TatsumakiUser {
             // Run through badges array and add to map.
             badges = new HashMap<>();
             for (int i = 0; i < json.getJSONArray("badgeSlots").length(); i++) {
-                String badgeName = json.getJSONArray("badgeSlots").getString(i);
-                if (badgeName == null) {
+                String badgeName = json.getJSONArray("badgeSlots").get(i).toString();
+                if (badgeName.equals("null")) {
                     badgeName = "empty";
                 }
 

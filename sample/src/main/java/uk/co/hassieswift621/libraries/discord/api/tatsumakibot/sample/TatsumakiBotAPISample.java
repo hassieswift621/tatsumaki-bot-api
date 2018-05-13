@@ -28,11 +28,11 @@ public class TatsumakiBotAPISample {
 
         // Create client.
         TatsumakiClient tatsumakiClient = new ClientBuilder()
-                .setAPIKey("YOUR TATSUMAKI BOT API KEY")
+                .setAPIKey("e8ee93e9655a2c68f76a44ba3849b719-82caf510cefb31-4c1c6c9765169d0a1b7823201f564219")
                 .build();
 
         // Get user profile data.
-        tatsumakiClient.getUser("USER ID",
+        tatsumakiClient.getUser("273261090404696074",
                 user -> {
                     // Success, output some stuff.
                     System.out.println("User's Rank: " + user.getRank());
