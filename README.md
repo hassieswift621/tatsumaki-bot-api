@@ -14,11 +14,13 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter. The current version is 0.2.0.
+This library is available on JCenter. The latest version is 0.2.1
+
+Replace ```{LATEST_VERSION} with the latest version.```
 
 **Gradle Setup**
 ```gradle
-implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.2.0'
+implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:{LATEST_VERSION}'
 ```
 
 **Maven Setup**
@@ -26,7 +28,7 @@ implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:0.2.0'
 <dependency>
   <groupId>uk.co.hassieswift621.libraries.discord.api</groupId>
   <artifactId>tatsumaki-bot</artifactId>
-  <version>0.2.0</version>
+  <version>{LATEST_VERSION}</version>
   <type>pom</type>
 </dependency>
 ```
