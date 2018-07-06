@@ -16,8 +16,7 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.sample;
 
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.*;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUser;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.TatsumakiClient;
 
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 15:47.
@@ -26,20 +25,25 @@ public class TatsumakiBotAPISample {
 
     public static void main(String[] args) {
 
-        // Create client.
-        TatsumakiClient tatsumakiClient = new ClientBuilder()
-                .setAPIKey("e8ee93e9655a2c68f76a44ba3849b719-82caf510cefb31-4c1c6c9765169d0a1b7823201f564219")
+        // Create client with a custom thread pool size of 1.
+        TatsumakiClient tatsumakiClient = new TatsumakiClient.Builder()
+                .setThreadPoolSize(1)
+                .setToken("YOUR TATSUMAKI BOT TOKEN")
                 .build();
 
         // Get user profile data.
-        tatsumakiClient.getUser("273261090404696074",
+        tatsumakiClient.getUser("USER ID",
                 user -> {
                     // Success, output some stuff.
+                    System.out.println("User's Background URL: " + user.getBackground().getImageURL());
                     System.out.println("User's Rank: " + user.getRank());
                     System.out.println("User's Reputation: " + user.getReputation());
                 },
                 // Output error message.
                 Throwable::printStackTrace
         );
+
+        // Shutdown the client to release resources to allow the program to exit.
+        tatsumakiClient.shutdown();
     }
 }

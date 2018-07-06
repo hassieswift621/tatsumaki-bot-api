@@ -17,12 +17,24 @@
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:30.
+ * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
  */
-public interface LevelProgress {
+public class LevelProgress {
 
-    long getXPProgress();
+    private final long xpProgress;
+    private final long xpRequired;
 
-    long getXPRequired();
+    public LevelProgress(long xpProgress, long xpRequired) {
+        this.xpProgress = xpProgress;
+        this.xpRequired = xpRequired;
+    }
+
+    public long getXPProgress() {
+        return xpProgress;
+    }
+
+    public long getXPRequired() {
+        return xpRequired;
+    }
 
 }

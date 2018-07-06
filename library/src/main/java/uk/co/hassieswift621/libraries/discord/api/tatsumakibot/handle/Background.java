@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
-
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUser;
-
-
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 16:10.
+ * Created by Hassie on Friday, 06 July, 2018 - 11:18
  */
-@Deprecated
-public interface ResponseCallback {
+public class Background {
 
-    void onSuccess(TatsumakiUser user);
+    private final String backgroundName;
+    private final String backgroundURL;
 
-    void onFailure(Throwable throwable);
+    public Background(String backgroundName) {
+        this.backgroundName = backgroundName;
+        this.backgroundURL = "https://www.tatsumaki.xyz/images/backgrounds/profile/" + backgroundName + ".png";
+    }
+
+    public String getName() {
+        return backgroundName;
+    }
+
+    public String getImageURL() {
+        return backgroundURL;
+    }
 
 }

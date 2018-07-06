@@ -16,34 +16,123 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiJSONException;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:26.
+ * Created by Hassie on Saturday, 05 May, 2018 - 11:36.
  */
-public interface TatsumakiUser {
+public class TatsumakiUserImpl implements TatsumakiUser {
 
-    String getAvatar();
+    private String avatar;
+    private String background;
+    private Map<Byte, String> badges;
+    private long credits;
+    private String infobox;
+    private long level;
+    private LevelProgress levelProgress;
+    private String name;
+    private long rank;
+    private long reputation;
+    private String title;
+    private long totalXP;
 
-    String getBackground();
+    public TatsumakiUserImpl(JSONObject json) throws TatsumakiJSONException {
 
-    Map<Byte, String> getBadges();
+        System.out.println(json);
+        try {
 
-    long getCredits();
+            avatar = json.getString("avatar_url");
+            background = json.optString("background", "Default");
+            credits = json.getLong("credits");
+            infobox = json.optString("info_box");
+            name = json.getString("name");
+            level = json.getLong("level");
+            levelProgress = new LevelProgressImpl(json.getJSONArray("xp").getLong(0),
+                    json.getJSONArray("xp").getLong(1));
+            rank = json.getLong("rank");
+            reputation = json.getLong("reputation");
+            title = json.optString("title");
+            totalXP = json.getLong("total_xp");
 
-    String getInfobox();
+            // Run through badges array and add to map.
+            badges = new HashMap<>();
+            for (int i = 0; i < json.getJSONArray("badgeSlots").length(); i++) {
+                String badgeName = json.getJSONArray("badgeSlots").get(i).toString();
+                if (badgeName.equals("null")) {
+                    badgeName = "empty";
+                }
 
-    long getLevel();
+                badges.put((byte) (i + 1), badgeName);
+            }
 
-    LevelProgress getLevelProgress();
+        } catch (JSONException e) {
+            throw new TatsumakiJSONException("Tatsumaki Bot API JSON Exception - Failed to extract JSON", e);
+        }
 
-    String getName();
+    }
 
-    long getRank();
+    @Override
+    public String getAvatar() {
+        return avatar;
+    }
 
-    long getReputation();
+    @Override
+    public String getBackground() {
+        return background;
+    }
 
-    String getTitle();
+    @Override
+    public Map<Byte, String> getBadges() {
+        return badges;
+    }
 
-    long getTotalXP();
+    @Override
+    public long getCredits() {
+        return credits;
+    }
+
+    @Override
+    public String getInfobox() {
+        return infobox;
+    }
+
+    @Override
+    public long getLevel() {
+        return level;
+    }
+
+    @Override
+    public LevelProgress getLevelProgress() {
+        return levelProgress;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public long getRank() {
+        return rank;
+    }
+
+    @Override
+    public long getReputation() {
+        return reputation;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public long getTotalXP() {
+        return totalXP;
+    }
 }

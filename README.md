@@ -5,8 +5,16 @@ An asynchronous Java API wrapper around one of the most popular bots on Discord,
 
 Currently, the API allows you to fetch user profile data.
 
-Note that I am in no way connected with the Tatsumaki Bot and their devs.
-If you have any queries about the bot itself, please visit https://tatsumaki.xyz/
+When you create the client, by default a number of fixed threads are created, specifically CPUs/CPU cores + 1.
+You can customise this using the client builder.
+
+The library is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
+
+Once you are done with the client, call its shutdown method to release the resources, to allow your program to shutdown cleanly.
+Note however, you must create a new instance of the client if you wish to make another API request.
+
+Note that I am not part of the Tatsumaki Bot development.
+If you have any queries about the bot or the API, please visit https://tatsumaki.xyz/
 
 How do I get an API key
 -----------------------
@@ -14,9 +22,9 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter. The latest version is 0.2.1
+This library is available on JCenter. The latest version is 0.3.0
 
-Replace ```{LATEST_VERSION} with the latest version.```
+Replace ``{LATEST_VERSION}`` with the latest version.
 
 **Gradle Setup**
 ```gradle
@@ -35,10 +43,15 @@ implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:{LATEST
 
 Tutorial
 --------
+**Retrieving user profile data**
 ```java
-// Create the client.
-TatsumakiClient tatsumakiClient = new ClientBuilder()
-    .setAPIKey("YOUR TATSUMAKI BOT API KEY")
+// Create the client with the default number of threads.
+TatsumakiClient tatsumakiClient = new TatsumakiClient("YOUR TATSUMAKI BOT TOKEN");
+
+// Create the client with a custom number of threads.
+TatsumakiClient tatsumakiClient = new TatsumakiClient.Builder()
+    .setThreadPoolSize(1)
+    .setToken("YOUR TATSUMAKI BOT TOKEN")
     .build();
 
 // Request for user profile data for a user.
@@ -54,6 +67,11 @@ tatsumakiClient.getUser("User ID",
 
 // Do other stuff here if required while the above request
 // is executed.
+```
+
+**Shutting down the client**
+```java
+tatsumakiClient.shutdown();
 ```
 
 License
