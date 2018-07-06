@@ -18,77 +18,90 @@ package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import uk.co.hassieswift621.libraries.asyncthreader.AsyncThreader;
-import uk.co.hassieswift621.libraries.asyncthreader.Callback;
 import uk.co.hassieswift621.libraries.asyncthreader.Request;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiIOException;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiJSONException;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUser;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.TatsumakiUserImpl;
+import uk.co.hassieswift621.libraries.jsonio.JsonIO;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.concurrent.Callable;
 
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 11:50.
  */
-class TatsumakiClientImpl implements TatsumakiClient {
+public class TatsumakiClient {
 
     private final String BASE_URL = "https://api.tatsumaki.xyz/";
-    private final String apiKey;
+    private final String token;
+    private final AsyncThreader asyncThreader;
+    private final OkHttpClient httpClient = new OkHttpClient();
 
-    public TatsumakiClientImpl(String apiKey) {
-        this.apiKey = apiKey;
+    public static class Builder {
+
+        private int threadPoolSize = Runtime.getRuntime().availableProcessors() + 1;
+        private String token;
+
+        public Builder setThreadPoolSize(int threadPoolSize) {
+            this.threadPoolSize = threadPoolSize;
+            return this;
+        }
+
+        public Builder setToken(@NotNull String token) {
+            this.token = token;
+            return this;
+        }
+
+        public TatsumakiClient build() {
+            return new TatsumakiClient(token, new AsyncThreader.Builder()
+                    .setThreadPoolSize(threadPoolSize)
+                    .build());
+        }
     }
 
-    @Override
-    public void getUser(long userId, IResponse response, IError error) {
+    public TatsumakiClient(@NotNull String token) {
+        this.token = token;
+        this.asyncThreader = new AsyncThreader();
+    }
+
+    private TatsumakiClient(String token, AsyncThreader asyncThreader) {
+        this.token = token;
+        this.asyncThreader = asyncThreader;
+    }
+
+    public void getUser(long userId, IResponse<TatsumakiUser> response, IError error) {
         final String ENDPOINT_URL = "users/";
-        sendResponse(ENDPOINT_URL + userId, response, error);
+        getUserResponse(ENDPOINT_URL + userId, response, error);
     }
 
-    @Override
-    public void getUser(String userId, IResponse response, IError error) {
+    public void getUser(String userId, IResponse<TatsumakiUser> response, IError error) {
         final String ENDPOINT_URL = "users/";
-        sendResponse(ENDPOINT_URL + userId, response, error);
+        getUserResponse(ENDPOINT_URL + userId, response, error);
     }
 
-    private void sendResponse(String requestURL, IResponse responseCallback, IError errorCallback) {
+    private void getUserResponse(String requestURL, IResponse<TatsumakiUser> responseCallback, IError errorCallback) {
 
-        // Create async threader.
-        AsyncThreader asyncThreader = new AsyncThreader.Builder()
-                .setThreadPoolSize(1)
-                .build();
-
-        Request<JSONObject> request = new Request<>(
+        // Create request.
+        Request<TatsumakiUser> request = new Request<>(
                 () -> {
 
                     try {
 
                         // Get JSON.
-                        OkHttpClient httpClient = new OkHttpClient();
-                        okhttp3.Request httpRequest = new okhttp3.Request.Builder()
-                                .url(BASE_URL + requestURL)
-                                .addHeader("Authorization", apiKey)
-                                .get()
-                                .build();
+                        Response response = httpClient.newCall(
+                                new okhttp3.Request.Builder()
+                                        .url(BASE_URL + requestURL)
+                                        .addHeader("Authorization", token)
+                                        .get()
+                                        .build())
+                                .execute();
 
-                        Response response = httpClient.newCall(httpRequest).execute();
+                        JSONObject json = JsonIO.toJSON(response.body().byteStream());
 
-                        // Convert input stream to JSON object.
-                        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                        byte[] buffer = new byte[1024];
-
-                        int length = response.body().byteStream().read(buffer);
-                        while (length != -1) {
-                            outputStream.write(buffer, 0, length);
-                            length = response.body().byteStream().read(buffer);
-                        }
-
-                        return new JSONObject(outputStream.toString("UTF-8"));
+                        return new TatsumakiUser(json);
 
                     } catch (IOException e) {
                         throw new TatsumakiIOException("Tatsumaki Bot API IO Exception - Failed to get response", e);
@@ -96,118 +109,20 @@ class TatsumakiClientImpl implements TatsumakiClient {
                         throw new TatsumakiJSONException("Tatsumaki Bot API JSON Exception - Failed to parse response", e);
                     }
                 },
-                new Callback<JSONObject>() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-
-                        // Execute the callback and shutdown the async threader.
-                        try {
-                            TatsumakiUser tatsumakiUser = new TatsumakiUserImpl(response);
-                            responseCallback.onResponse(tatsumakiUser);
-                        } catch (TatsumakiJSONException e) {
-                            errorCallback.onError(e);
-                        }
-
-                        asyncThreader.shutdown();
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        // Execute the callback and shutdown the async threader.
-                        errorCallback.onError(throwable);
-                        asyncThreader.shutdown();
-                    }
-                }
+                responseCallback::onResponse,
+                errorCallback::onError
         );
 
-        // Execute the task.
-        asyncThreader.execute(request);
-
-    }
-
-    @Deprecated
-    @Override
-    public void getUser(long userId, ResponseCallback callback) {
-        final String ENDPOINT_URL = "users/";
-        sendResponse(ENDPOINT_URL + userId, callback);
-    }
-
-    @Deprecated
-    @Override
-    public void getUser(String userId, ResponseCallback callback) {
-        final String ENDPOINT_URL = "users/";
-        sendResponse(ENDPOINT_URL + userId, callback);
-    }
-
-    @Deprecated
-    private void sendResponse(String requestURL, ResponseCallback callback) {
-
-        // Create async threader.
-        AsyncThreader asyncThreader = new AsyncThreader.Builder()
-                .setThreadPoolSize(1)
-                .build();
-
-        Request<JSONObject> request = new Request<>(
-                new Callable<JSONObject>() {
-                    @Override
-                    public JSONObject call() throws Exception {
-
-                        try {
-
-                            // Get JSON.
-                            OkHttpClient httpClient = new OkHttpClient();
-                            okhttp3.Request httpRequest = new okhttp3.Request.Builder()
-                                    .url(BASE_URL + requestURL)
-                                    .addHeader("Authorization", apiKey)
-                                    .get()
-                                    .build();
-
-                            Response response = httpClient.newCall(httpRequest).execute();
-
-                            // Convert input stream to JSON object.
-                            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                            byte[] buffer = new byte[1024];
-
-                            int length = response.body().byteStream().read(buffer);
-                            while (length != -1) {
-                                outputStream.write(buffer, 0, length);
-                                length = response.body().byteStream().read(buffer);
-                            }
-
-                            return new JSONObject(outputStream.toString("UTF-8"));
-
-                        } catch (IOException e) {
-                            throw new TatsumakiIOException("Tatsumaki Bot API IO Exception - Failed to get response", e);
-                        } catch (JSONException e) {
-                            throw new TatsumakiJSONException("Tatsumaki Bot API JSON Exception - Failed to parse response", e);
-                        }
-                    }
-                },
-                new Callback<JSONObject>() {
-                    @Override
-                    public void onSuccess(JSONObject response) {
-
-                        // Execute the callback and shutdown the async threader.
-                        try {
-                            TatsumakiUser tatsumakiUser = new TatsumakiUserImpl(response);
-                            callback.onSuccess(tatsumakiUser);
-                        } catch (TatsumakiJSONException e) {
-                            callback.onFailure(e);
-                        }
-
-                        asyncThreader.shutdown();
-                    }
-
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        // Execute the callback and shutdown the async threader.
-                        callback.onFailure(throwable);
-                        asyncThreader.shutdown();
-                    }
-                }
-        );
-
-        // Execute the task.
+        // Execute request.
         asyncThreader.execute(request);
     }
+
+    /**
+     * Shuts down Async Threader and OkHttp to release resources.
+     */
+    public void shutdown() {
+        asyncThreader.shutdown();
+        httpClient.dispatcher().executorService().shutdown();
+    }
+
 }

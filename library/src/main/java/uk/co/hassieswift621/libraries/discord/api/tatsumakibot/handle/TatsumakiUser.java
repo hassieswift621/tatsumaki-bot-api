@@ -16,6 +16,7 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiJSONException;
@@ -26,11 +27,11 @@ import java.util.Map;
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 11:36.
  */
-public class TatsumakiUserImpl implements TatsumakiUser {
+public class TatsumakiUser {
 
     private String avatar;
-    private String background;
-    private Map<Byte, String> badges;
+    private Background background;
+    private Map<Integer, BadgeSlot> badgeSlots;
     private long credits;
     private String infobox;
     private long level;
@@ -41,33 +42,40 @@ public class TatsumakiUserImpl implements TatsumakiUser {
     private String title;
     private long totalXP;
 
-    public TatsumakiUserImpl(JSONObject json) throws TatsumakiJSONException {
+    public TatsumakiUser(JSONObject json) throws TatsumakiJSONException {
 
-        System.out.println(json);
         try {
 
             avatar = json.getString("avatar_url");
-            background = json.optString("background", "Default");
+            background = new Background(json.getString("background"));
             credits = json.getLong("credits");
             infobox = json.optString("info_box");
             name = json.getString("name");
             level = json.getLong("level");
-            levelProgress = new LevelProgressImpl(json.getJSONArray("xp").getLong(0),
-                    json.getJSONArray("xp").getLong(1));
+            levelProgress = new LevelProgress(
+                    json.getJSONArray("xp").getLong(0),
+                    json.getJSONArray("xp").getLong(1)
+            );
             rank = json.getLong("rank");
             reputation = json.getLong("reputation");
             title = json.optString("title");
             totalXP = json.getLong("total_xp");
 
             // Run through badges array and add to map.
-            badges = new HashMap<>();
-            for (int i = 0; i < json.getJSONArray("badgeSlots").length(); i++) {
-                String badgeName = json.getJSONArray("badgeSlots").get(i).toString();
-                if (badgeName.equals("null")) {
-                    badgeName = "empty";
-                }
+            badgeSlots = new HashMap<>();
+            JSONArray badgesArray = json.getJSONArray("badgeSlots");
+            for (int i = 0; i < badgesArray.length(); i++) {
 
-                badges.put((byte) (i + 1), badgeName);
+                int badgeSlotNo = i + 1;
+
+                String badgeName = badgesArray.optString(i, null);
+
+
+                if (badgeName == null) {
+                    badgeSlots.put(i + 1, new BadgeSlot(badgeSlotNo));
+                } else {
+                    badgeSlots.put(i + 1, new BadgeSlot(badgeSlotNo, badgeName));
+                }
             }
 
         } catch (JSONException e) {
@@ -76,63 +84,52 @@ public class TatsumakiUserImpl implements TatsumakiUser {
 
     }
 
-    @Override
     public String getAvatar() {
         return avatar;
     }
 
-    @Override
-    public String getBackground() {
+    public Background getBackground() {
         return background;
     }
 
-    @Override
-    public Map<Byte, String> getBadges() {
-        return badges;
+    public Map<Integer, BadgeSlot> getBadgeSlots() {
+        return badgeSlots;
     }
 
-    @Override
     public long getCredits() {
         return credits;
     }
 
-    @Override
     public String getInfobox() {
         return infobox;
     }
 
-    @Override
     public long getLevel() {
         return level;
     }
 
-    @Override
     public LevelProgress getLevelProgress() {
         return levelProgress;
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public long getRank() {
         return rank;
     }
 
-    @Override
     public long getReputation() {
         return reputation;
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
 
-    @Override
     public long getTotalXP() {
         return totalXP;
     }
+
 }
