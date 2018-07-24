@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
 
 /**
- * Created by Hassie on Friday, 06 July, 2018 - 11:18
+ * Created by Hassie on Tuesday, 24 July, 2018 - 11:21
  */
-public class Background {
+public class TatsumakiException extends RuntimeException {
 
-    private final String backgroundName;
-    private final String backgroundURL;
-
-    public Background(String backgroundName) {
-        this.backgroundName = backgroundName;
-        this.backgroundURL = "https://www.tatsumaki.xyz/images/backgrounds/profile/" + backgroundName + ".png";
+    public TatsumakiException(String message) {
+        super("Tatsumaki Bot API Exception - " + message);
     }
 
-    public String getName() {
-        return backgroundName;
-    }
-
-    public String getImageURL() {
-        return backgroundURL;
+    public TatsumakiException(String message, Throwable cause) {
+        super("Tatsumaki Bot API Exception - " + message, cause);
     }
 
 }

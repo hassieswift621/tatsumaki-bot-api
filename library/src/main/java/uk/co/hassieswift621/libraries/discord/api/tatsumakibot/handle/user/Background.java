@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+<<<<<<< Updated upstream:library/src/main/java/uk/co/hassieswift621/libraries/discord/api/tatsumakibot/handle/TatsumakiUser.java
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
 
 import org.json.JSONArray;
@@ -130,6 +131,29 @@ public class TatsumakiUser {
 
     public long getTotalXP() {
         return totalXP;
+=======
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
+
+/**
+ * Created by Hassie on Friday, 06 July, 2018 - 11:18
+ */
+public class Background {
+
+    private final String imageUrl;
+    private final String name;
+
+    public Background(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getName() {
+        return name;
+>>>>>>> Stashed changes:library/src/main/java/uk/co/hassieswift621/libraries/discord/api/tatsumakibot/handle/user/Background.java
     }
 
 }

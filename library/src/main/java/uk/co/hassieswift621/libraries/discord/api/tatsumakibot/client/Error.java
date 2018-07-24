@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:34.
+ * Created by Hassie on Tuesday, 08 May, 2018 - 19:13.
  */
-public class TatsumakiJSONException extends Exception {
+@FunctionalInterface
+public interface Error {
 
-    public TatsumakiJSONException(String message, Throwable cause) {
-        super(message, cause);
-    }
+    void onError(Throwable throwable);
 
 }

@@ -14,15 +14,27 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:32.
+ * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
  */
-public class TatsumakiIOException extends Exception {
+public class LevelProgress {
 
-    public TatsumakiIOException(String message, Throwable cause) {
-        super(message, cause);
+    private final long currentXp;
+    private final long requiredXp;
+
+    public LevelProgress(long currentXp, long requiredXp) {
+        this.currentXp = currentXp;
+        this.requiredXp = requiredXp;
+    }
+
+    public long getCurrentXp() {
+        return currentXp;
+    }
+
+    public long getRequiredXp() {
+        return requiredXp;
     }
 
 }
