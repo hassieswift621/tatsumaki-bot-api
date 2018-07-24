@@ -15,11 +15,7 @@
  */
 
 group = 'uk.co.hassieswift621.libraries.discord.api'
-<<<<<<< Updated upstream
-version = '0.3.0'
-=======
 version = '0.4.0'
->>>>>>> Stashed changes
 
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
@@ -40,25 +36,17 @@ repositories {
 }
 
 dependencies {
-<<<<<<< Updated upstream
-    implementation 'com.intellij:annotations:12.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'org.json:json:20180130'
-    implementation 'uk.co.hassieswift621.libraries:async-threader:2.0.2'
-    implementation 'uk.co.hassieswift621.libraries:json-io:1.1.0'
-=======
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'org.json:json:20180130'
     implementation 'uk.co.hassieswift621.libraries:async-threader:2.0.2'
     implementation 'uk.co.hassieswift621.libraries:json-io:1.2.0'
->>>>>>> Stashed changes
 }
 
 publish {
     userOrg = 'hassieswift621'
     groupId = 'uk.co.hassieswift621.libraries.discord.api'
     artifactId = 'tatsumaki-bot'
-    publishVersion = '0.3.0'
+    publishVersion = '0.4.0'
     desc = 'An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.'
     website = 'https://github.com/hassieswift621/tatsumaki-bot-api'
 }
