@@ -35,7 +35,7 @@ public class TatsumakiBotAPISample {
         tatsumakiClient.getUser("USER ID",
                 user -> {
                     // Success, output some stuff.
-                    System.out.println("User's Background URL: " + user.getBackground().getImageURL());
+                    System.out.println("User's Background URL: " + user.getBackground().getImageUrl());
                     System.out.println("User's Rank: " + user.getRank());
                     System.out.println("User's Reputation: " + user.getReputation());
                 },

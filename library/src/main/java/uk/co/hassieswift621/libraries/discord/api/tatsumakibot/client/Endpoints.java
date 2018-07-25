@@ -27,6 +27,7 @@ public class Endpoints {
     private static final String BADGE_IMAGE = "https://www.tatsumaki.xyz/images/badges/";
 
     private static final String GUILDS = "guilds/";
+    private static final String PING = "ping/";
     private static final String USERS = "users/";
 
     public static String getBackgroundImage(String backgroundName) {
@@ -51,6 +52,10 @@ public class Endpoints {
 
     public static String getGuildUserStats(String guildId, String userId) {
         return BASE_URL + GUILDS + guildId + "/members/" + userId + "/stats";
+    }
+
+    public static String getPing() {
+        return BASE_URL + PING;
     }
 
     public static String getUser(long userId) {

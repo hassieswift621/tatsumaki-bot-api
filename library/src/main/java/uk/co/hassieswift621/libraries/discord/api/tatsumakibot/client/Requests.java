@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiException;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.Parser;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
@@ -58,6 +59,10 @@ public class Requests {
 
     public GuildUserStats getGuildUserStats(String guildId, String userId) throws TatsumakiException {
         return Parser.parseGuildUserStats(makeGetRequest(Endpoints.getGuildUserStats(guildId, userId)));
+    }
+
+    public Ping getPing() throws TatsumakiException {
+        return Parser.parsePing(makeGetRequest(Endpoints.getPing()));
     }
 
     public TatsumakiUser getUser(long userId) throws TatsumakiException {

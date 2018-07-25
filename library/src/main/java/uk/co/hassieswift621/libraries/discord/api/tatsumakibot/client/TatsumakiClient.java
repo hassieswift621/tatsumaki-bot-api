@@ -21,6 +21,7 @@ import uk.co.hassieswift621.libraries.asyncthreader.AsyncThreader;
 import uk.co.hassieswift621.libraries.asyncthreader.Request;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
 
 /**
@@ -100,6 +101,15 @@ public class TatsumakiClient {
         asyncThreader.execute(request);
     }
 
+    public void getPing(Response<Ping> response, Error error) {
+        Request<Ping> request = new Request<>(
+                requests::getPing,
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
     public void getUser(long userId, Response<TatsumakiUser> response, Error error) {
         Request<TatsumakiUser> request = new Request<>(
                 () -> requests.getUser(userId),
@@ -119,7 +129,7 @@ public class TatsumakiClient {
     }
 
     /**
-     * Shuts down Async Threader and OkHttp to release resources.
+     * Shuts down Async Threader and OkHttp to shutdown executors which keep program alive.
      */
     public void shutdown() {
         asyncThreader.shutdown();

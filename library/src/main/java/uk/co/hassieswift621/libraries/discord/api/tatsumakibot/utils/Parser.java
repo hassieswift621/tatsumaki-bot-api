@@ -24,12 +24,14 @@ import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.Tatsum
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildRankedUser;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.*;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
 import uk.co.hassieswift621.libraries.jsonio.exceptions.JsonIOException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -84,6 +86,22 @@ public class Parser {
 
         } catch (IOException | JSONException | JsonIOException e) {
             throw new TatsumakiException("Failed to parse guild user stats response", e);
+        }
+    }
+
+    public static Ping parsePing(InputStream response) throws TatsumakiException {
+
+        try (InputStream inputStream = response) {
+
+            JSONObject json = JsonIO.toJson(inputStream);
+
+            String message = json.getString("message");
+            Instant time = Instant.ofEpochMilli(json.getLong("time"));
+
+            return new Ping(message, time);
+
+        } catch (IOException | JSONException | JsonIOException e) {
+            throw new TatsumakiException("Failed to parse ping response", e);
         }
     }
 
