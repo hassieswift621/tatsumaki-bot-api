@@ -33,12 +33,13 @@ public class TatsumakiUser {
     private final String name;
     private final long rank;
     private final long reputation;
+    private final long userId;
     private final String title;
     private final long totalXP;
 
     public TatsumakiUser(String avatar, Background background, Map<Integer, BadgeSlot> badgeSlots, long credits,
                          String infobox, long level, LevelProgress levelProgress, String name, long rank,
-                         long reputation, String title, long totalXP) {
+                         long reputation, long userId, String title, long totalXP) {
         this.avatar = avatar;
         this.background = background;
         this.badgeSlots = badgeSlots;
@@ -49,6 +50,7 @@ public class TatsumakiUser {
         this.name = name;
         this.rank = rank;
         this.reputation = reputation;
+        this.userId = userId;
         this.title = title;
         this.totalXP = totalXP;
     }
@@ -91,6 +93,10 @@ public class TatsumakiUser {
 
     public long getReputation() {
         return reputation;
+    }
+
+    public long getUserId() {
+        return userId;
     }
 
     public String getTitle() {

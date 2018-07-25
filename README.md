@@ -3,15 +3,15 @@ Tatsumaki Bot API [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki-
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
 
-Currently, the API allows you to fetch user profile data.
+The API wrapper has all endpoints currently available or soon to be available implemented: guilds, users and ping.
 
 When you create the client, by default a number of fixed threads are created, specifically CPUs/CPU cores + 1.
 You can customise this using the client builder.
 
 The library is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
 
-Once you are done with the client, call its shutdown method to release the resources, to allow your program to shutdown cleanly.
-Note however, you must create a new instance of the client if you wish to make another API request.
+Once you are done with the client, call its shutdown method to shutdown the executor service, to allow your program to shutdown.
+Note however, you must create a new instance of the client if you wish to make another API request after shutting down the client.
 
 Note that I am not part of the Tatsumaki Bot development.
 If you have any queries about the bot or the API, please visit https://tatsumaki.xyz/

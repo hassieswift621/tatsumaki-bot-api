@@ -16,27 +16,31 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
 
-import java.util.List;
-
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
+ * Created by Hassie on Wednesday, 25 July, 2018 - 19:51
  */
-public class GuildLeaderboard {
+public class GuildUserScore {
 
     private final long guildId;
-    private final List<GuildRankedUser> rankedUsers;
+    private final long score;
+    private final long userId;
 
-    public GuildLeaderboard(long guildId, List<GuildRankedUser> rankedUsers) {
+    public GuildUserScore(long guildId, long score, long userId) {
         this.guildId = guildId;
-        this.rankedUsers = rankedUsers;
+        this.score = score;
+        this.userId = userId;
     }
 
     public long getGuildId() {
         return guildId;
     }
 
-    public List<GuildRankedUser> getRankedUsers() {
-        return rankedUsers;
+    public long getScore() {
+        return score;
+    }
+
+    public long getUserId() {
+        return userId;
     }
 
 }

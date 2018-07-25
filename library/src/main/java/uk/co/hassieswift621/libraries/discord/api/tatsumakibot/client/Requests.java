@@ -16,15 +16,17 @@
 
 package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+import okhttp3.*;
 import okhttp3.Response;
 import org.json.JSONObject;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiException;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserPoints;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserScore;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.GuildUpdateAction;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.Parser;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
 import uk.co.hassieswift621.libraries.jsonio.exceptions.JsonIOException;
@@ -46,11 +48,11 @@ public class Requests {
     }
 
     public GuildLeaderboard getGuildLeaderboard(long guildId) throws TatsumakiException {
-        return Parser.parseGuildLeaderboard(makeGetRequest(Endpoints.getGuildLeaderboard(guildId)));
+        return Parser.parseGuildLeaderboard(makeGetRequest(Endpoints.getGuildLeaderboard(guildId)), guildId);
     }
 
     public GuildLeaderboard getGuildLeaderboard(String guildId) throws TatsumakiException {
-        return Parser.parseGuildLeaderboard(makeGetRequest(Endpoints.getGuildLeaderboard(guildId)));
+        return getGuildLeaderboard(Parser.parseGuildId(guildId));
     }
 
     public GuildUserStats getGuildUserStats(long guildId, long userId) throws TatsumakiException {
@@ -58,7 +60,7 @@ public class Requests {
     }
 
     public GuildUserStats getGuildUserStats(String guildId, String userId) throws TatsumakiException {
-        return Parser.parseGuildUserStats(makeGetRequest(Endpoints.getGuildUserStats(guildId, userId)));
+        return getGuildUserStats(Parser.parseGuildId(guildId), Parser.parseUserId(userId));
     }
 
     public Ping getPing() throws TatsumakiException {
@@ -66,20 +68,62 @@ public class Requests {
     }
 
     public TatsumakiUser getUser(long userId) throws TatsumakiException {
-        return Parser.parseUser(makeGetRequest(Endpoints.getUser(userId)));
+        return Parser.parseUser(makeGetRequest(Endpoints.getUser(userId)), userId);
     }
 
     public TatsumakiUser getUser(String userId) throws TatsumakiException {
-        return Parser.parseUser(makeGetRequest(Endpoints.getUser(userId)));
+        return getUser(Parser.parseUserId(userId));
     }
 
-    private InputStream makeGetRequest(String getRequest) throws TatsumakiException {
+    public GuildUserPoints updateGuildUserPoints(long guildId, long userId, GuildUpdateAction action,
+                                                int amount) throws TatsumakiException {
+        return Parser.parseGuildUserPoints(makePutRequest(
+                Endpoints.putGuildUserPoints(guildId, userId),
+                Parser.createGuildUserPointsRequest(action, amount)), guildId, userId);
+    }
+
+    public GuildUserPoints updateGuildUserPoints(String guildId, String userId, GuildUpdateAction action,
+                                               int amount) throws TatsumakiException {
+        return updateGuildUserPoints(Parser.parseGuildId(guildId), Parser.parseUserId(userId), action, amount);
+    }
+
+    public GuildUserScore updateGuildUserScore(long guildId, long userId, GuildUpdateAction action,
+                                               int amount) throws TatsumakiException {
+        return Parser.parseGuildUserScore(makePutRequest(
+                Endpoints.putGuildUserScore(guildId, userId),
+                Parser.createGuildUserScoreRequest(action, amount)), guildId, userId);
+    }
+
+    public GuildUserScore updateGuildUserScore(String guildId, String userId, GuildUpdateAction action,
+                                               int amount) throws TatsumakiException {
+        return updateGuildUserScore(Parser.parseGuildId(guildId), Parser.parseUserId(userId), action, amount);
+    }
+
+    private InputStream makeGetRequest(String url) throws TatsumakiException {
 
         Request request = new Request.Builder()
                 .get()
                 .header("Authorization", token)
-                .url(getRequest)
+                .url(url)
                 .build();
+
+        return getResponse(request);
+    }
+
+    private InputStream makePutRequest(String url, String json) throws TatsumakiException {
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+
+        Request request = new Request.Builder()
+                .put(requestBody)
+                .header("Authorization", token)
+                .url(url)
+                .build();
+
+        return getResponse(request);
+    }
+
+    private InputStream getResponse(Request request) throws TatsumakiException {
 
         try {
 

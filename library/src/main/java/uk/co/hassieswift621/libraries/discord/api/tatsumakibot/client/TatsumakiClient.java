@@ -20,9 +20,12 @@ import okhttp3.OkHttpClient;
 import uk.co.hassieswift621.libraries.asyncthreader.AsyncThreader;
 import uk.co.hassieswift621.libraries.asyncthreader.Request;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserPoints;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserScore;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.GuildUpdateAction;
 
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 11:50.
@@ -122,6 +125,46 @@ public class TatsumakiClient {
     public void getUser(String userId, Response<TatsumakiUser> response, Error error) {
         Request<TatsumakiUser> request = new Request<>(
                 () -> requests.getUser(userId),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    public void updateGuildUserPoints(long guildId, long userId, GuildUpdateAction action, int amount,
+                                      Response<GuildUserPoints> response, Error error) {
+        Request<GuildUserPoints> request = new Request<>(
+                () -> requests.updateGuildUserPoints(guildId, userId, action, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    public void updateGuildUserPoints(String guildId, String userId, GuildUpdateAction action, int amount,
+                                      Response<GuildUserPoints> response, Error error) {
+        Request<GuildUserPoints> request = new Request<>(
+                () -> requests.updateGuildUserPoints(guildId, userId, action, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    public void updateGuildUserScore(long guildId, long userId, GuildUpdateAction action, int amount,
+                                     Response<GuildUserScore> response, Error error) {
+        Request<GuildUserScore> request = new Request<>(
+                () -> requests.updateGuildUserScore(guildId, userId, action, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    public void updateGuildUserScore(String guildId, String userId, GuildUpdateAction action, int amount,
+                                     Response<GuildUserScore> response, Error error) {
+        Request<GuildUserScore> request = new Request<>(
+                () -> requests.updateGuildUserScore(guildId, userId, action, amount),
                 response::onResponse,
                 error::onError
         );

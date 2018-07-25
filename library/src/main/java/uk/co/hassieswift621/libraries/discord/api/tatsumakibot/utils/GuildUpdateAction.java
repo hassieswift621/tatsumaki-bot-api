@@ -14,29 +14,25 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
-
-import java.util.List;
+package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
+ * Created by Hassie on Wednesday, 25 July, 2018 - 19:02
  */
-public class GuildLeaderboard {
+public enum GuildUpdateAction {
 
-    private final long guildId;
-    private final List<GuildRankedUser> rankedUsers;
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
 
-    public GuildLeaderboard(long guildId, List<GuildRankedUser> rankedUsers) {
-        this.guildId = guildId;
-        this.rankedUsers = rankedUsers;
+    private final String action;
+
+    GuildUpdateAction(String action) {
+        this.action = action;
     }
 
-    public long getGuildId() {
-        return guildId;
-    }
-
-    public List<GuildRankedUser> getRankedUsers() {
-        return rankedUsers;
+    public String getAction() {
+        return action;
     }
 
 }

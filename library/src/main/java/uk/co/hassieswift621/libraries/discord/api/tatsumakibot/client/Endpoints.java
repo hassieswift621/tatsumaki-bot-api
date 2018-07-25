@@ -42,15 +42,7 @@ public class Endpoints {
         return BASE_URL + GUILDS + guildId + "/leaderboard";
     }
 
-    public static String getGuildLeaderboard(String guildId) {
-        return BASE_URL + GUILDS + guildId + "/leaderboard";
-    }
-
     public static String getGuildUserStats(long guildId, long userId) {
-        return BASE_URL + GUILDS + guildId + "/members/" + userId + "/stats";
-    }
-
-    public static String getGuildUserStats(String guildId, String userId) {
         return BASE_URL + GUILDS + guildId + "/members/" + userId + "/stats";
     }
 
@@ -62,8 +54,12 @@ public class Endpoints {
         return BASE_URL + USERS + userId;
     }
 
-    public static String getUser(String userId) {
-        return BASE_URL + USERS + userId;
+    public static String putGuildUserPoints(long guildId, long userId) {
+        return BASE_URL + GUILDS + guildId + "/members/" + userId + "/points";
+    }
+
+    public static String putGuildUserScore(long guildId, long userId) {
+        return BASE_URL + GUILDS + guildId + "/members/" + userId + "/score";
     }
 
 }

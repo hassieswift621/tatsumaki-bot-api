@@ -21,9 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.Endpoints;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiException;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildRankedUser;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.*;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.*;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
@@ -40,7 +38,52 @@ import java.util.stream.Collectors;
  */
 public class Parser {
 
-    public static GuildLeaderboard parseGuildLeaderboard(InputStream response) throws TatsumakiException {
+    public static String createGuildUserPointsRequest(GuildUpdateAction action, int amount) throws TatsumakiException {
+
+        if (amount < 1 || amount > 50000)
+            throw new TatsumakiException("Failed to create guild user score response body: The amount of points to adjust must be between 0 (exclusive) and 50,000 (inclusive)");
+
+        try {
+
+            JSONObject json = new JSONObject();
+            json.put("amount", amount).put("action", action.getAction());
+
+            return json.toString();
+
+        } catch (JSONException e) {
+            throw new TatsumakiException("Failed to create guild user points response body", e);
+        }
+    }
+
+    public static String createGuildUserScoreRequest(GuildUpdateAction action, int amount) throws TatsumakiException {
+
+        if (amount < 1 || amount > 50000)
+            throw new TatsumakiException("Failed to create guild user score response body: The amount of score to adjust must be between 0 (exclusive) and 50,000 (inclusive)");
+
+        try {
+
+            JSONObject json = new JSONObject();
+            json.put("amount", amount).put("action", action.getAction());
+
+            return json.toString();
+
+        } catch (JSONException e) {
+            throw new TatsumakiException("Failed to create guild user score response body", e);
+        }
+    }
+
+    public static Long parseGuildId(String guildId) throws TatsumakiException {
+
+        try {
+
+            return Long.parseUnsignedLong(guildId);
+
+        } catch (NumberFormatException e) {
+            throw new TatsumakiException("Guild ID is not valid", e);
+        }
+    }
+
+    public static GuildLeaderboard parseGuildLeaderboard(InputStream response, long guildId) throws TatsumakiException {
 
         try (InputStream inputStream = response) {
 
@@ -64,10 +107,40 @@ public class Parser {
                 guildRankedUsers.add(new GuildRankedUser(userId, rank, score));
             }
 
-            return new GuildLeaderboard(Collections.unmodifiableList(guildRankedUsers));
+            return new GuildLeaderboard(guildId, Collections.unmodifiableList(guildRankedUsers));
 
         } catch (IOException | JSONException | JsonIOException e) {
             throw new TatsumakiException("Failed to parse guild leaderboard response", e);
+        }
+    }
+
+    public static GuildUserPoints parseGuildUserPoints(InputStream response, long guildId, long userId) throws TatsumakiException {
+
+        try (InputStream inputStream = response) {
+
+            JSONObject json = JsonIO.toJson(inputStream);
+
+            long points = Long.parseUnsignedLong(json.getString("points"));
+
+            return new GuildUserPoints(guildId, points, userId);
+
+        } catch (IOException | JSONException | JsonIOException e) {
+            throw new TatsumakiException("Failed to parse updated guild user points response", e);
+        }
+    }
+
+    public static GuildUserScore parseGuildUserScore(InputStream response, long guildId, long userId) throws TatsumakiException {
+
+        try (InputStream inputStream = response) {
+
+            JSONObject json = JsonIO.toJson(inputStream);
+
+            long score = Long.parseUnsignedLong(json.getString("score"));
+
+            return new GuildUserScore(guildId, score, userId);
+
+        } catch (IOException | JSONException | JsonIOException e) {
+            throw new TatsumakiException("Failed to parse updated guild user score response", e);
         }
     }
 
@@ -105,7 +178,7 @@ public class Parser {
         }
     }
 
-    public static TatsumakiUser parseUser(InputStream response) throws TatsumakiException {
+    public static TatsumakiUser parseUser(InputStream response, long userId) throws TatsumakiException {
 
         try (InputStream inputStream = response) {
 
@@ -148,10 +221,21 @@ public class Parser {
             }
 
             return new TatsumakiUser(avatar, background, Collections.unmodifiableMap(badgeSlots), credits, infobox, level,
-                    levelProgress, name, rank, reputation, title, totalXP);
+                    levelProgress, name, rank, reputation, userId, title, totalXP);
 
         } catch (IOException | JSONException | JsonIOException e) {
             throw new TatsumakiException("Failed to parse user response", e);
+        }
+    }
+
+    public static Long parseUserId(String userId) throws TatsumakiException {
+
+        try {
+
+            return Long.parseUnsignedLong(userId);
+
+        } catch (NumberFormatException e) {
+            throw new TatsumakiException("User ID is not valid", e);
         }
     }
 
