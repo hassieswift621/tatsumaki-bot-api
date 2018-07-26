@@ -14,6 +14,27 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
+
+/**
+ * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
+ */
+public class LevelProgress {
+
+    private final long currentXp;
+    private final long requiredXp;
+
+    public LevelProgress(long currentXp, long requiredXp) {
+        this.currentXp = currentXp;
+        this.requiredXp = requiredXp;
+    }
+
+    public long getCurrentXp() {
+        return currentXp;
+    }
+
+    public long getRequiredXp() {
+        return requiredXp;
+    }
+
+}

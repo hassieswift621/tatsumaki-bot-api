@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.exceptions;
 
 /**
- * Created by Hassie on Tuesday, 08 May, 2018 - 19:13.
+ * Created by Hassie on Tuesday, 24 July, 2018 - 11:21
  */
-@FunctionalInterface
-public interface IError {
+public class TatsumakiException extends RuntimeException {
 
-    void onError(Throwable throwable);
+    public TatsumakiException(String message) {
+        super("Tatsumaki Bot API Exception - " + message);
+    }
+
+    public TatsumakiException(String message, Throwable cause) {
+        super("Tatsumaki Bot API Exception - " + message, cause);
+    }
 
 }

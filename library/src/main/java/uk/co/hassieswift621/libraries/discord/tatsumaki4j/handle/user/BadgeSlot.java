@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
+
+import java.util.Optional;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
+ * Created by Hassie on Friday, 06 July, 2018 - 11:16
  */
-public class LevelProgress {
+public class BadgeSlot {
 
-    private final long xpProgress;
-    private final long xpRequired;
+    private final Badge badge;
+    private final int slotNo;
 
-    public LevelProgress(long xpProgress, long xpRequired) {
-        this.xpProgress = xpProgress;
-        this.xpRequired = xpRequired;
+    public BadgeSlot(Badge badge, int slotNo) {
+        this.badge = badge;
+        this.slotNo = slotNo;
     }
 
-    public long getXPProgress() {
-        return xpProgress;
+    public Optional<Badge> getBadge() {
+        return Optional.ofNullable(badge);
     }
 
-    public long getXPRequired() {
-        return xpRequired;
+    public int getSlotNo() {
+        return slotNo;
     }
 
 }

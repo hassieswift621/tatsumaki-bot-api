@@ -14,15 +14,33 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:32.
+ * Created by Hassie on Wednesday, 25 July, 2018 - 20:55
  */
-public class TatsumakiIOException extends Exception {
+public class GuildUserPoints {
 
-    public TatsumakiIOException(String message, Throwable cause) {
-        super(message, cause);
+    private final long guildId;
+    private final long points;
+    private final long userId;
+
+    public GuildUserPoints(long guildId, long points, long userId) {
+        this.guildId = guildId;
+        this.points = points;
+        this.userId = userId;
+    }
+
+    public long getGuildId() {
+        return guildId;
+    }
+
+    public long getPoints() {
+        return points;
+    }
+
+    public long getUserId() {
+        return userId;
     }
 
 }

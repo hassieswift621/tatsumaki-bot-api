@@ -14,6 +14,27 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
+
+/**
+ * Created by Hassie on Friday, 06 July, 2018 - 11:18
+ */
+public class Background {
+
+    private final String imageUrl;
+    private final String name;
+
+    public Background(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+}

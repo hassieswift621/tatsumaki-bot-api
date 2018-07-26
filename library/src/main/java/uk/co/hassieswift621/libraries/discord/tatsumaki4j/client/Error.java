@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
+
+/**
+ * Created by Hassie on Tuesday, 08 May, 2018 - 19:13.
+ */
+@FunctionalInterface
+public interface Error {
+
+    void onError(Throwable throwable);
+
+}

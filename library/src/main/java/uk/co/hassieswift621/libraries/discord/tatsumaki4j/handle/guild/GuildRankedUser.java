@@ -14,14 +14,33 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
 /**
- * Created by Hassie on Tuesday, 08 May, 2018 - 19:10.
+ * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
  */
-@FunctionalInterface
-public interface IResponse<T> {
+public class GuildRankedUser {
 
-    void onResponse(T response);
+    private final long userId;
+    private final long rank;
+    private final long score;
+
+    public GuildRankedUser(long userId, long rank, long score) {
+        this.userId = userId;
+        this.rank = rank;
+        this.score = score;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public long getRank() {
+        return rank;
+    }
+
+    public long getScore() {
+        return score;
+    }
 
 }

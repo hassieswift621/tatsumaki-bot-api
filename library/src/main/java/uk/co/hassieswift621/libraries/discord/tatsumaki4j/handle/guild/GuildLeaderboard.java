@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
+
+import java.util.List;
 
 /**
- * Created by Hassie on Friday, 06 July, 2018 - 11:18
+ * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
  */
-public class Background {
+public class GuildLeaderboard {
 
-    private final String backgroundName;
-    private final String backgroundURL;
+    private final long guildId;
+    private final List<GuildRankedUser> rankedUsers;
 
-    public Background(String backgroundName) {
-        this.backgroundName = backgroundName;
-        this.backgroundURL = "https://www.tatsumaki.xyz/images/backgrounds/profile/" + backgroundName + ".png";
+    public GuildLeaderboard(long guildId, List<GuildRankedUser> rankedUsers) {
+        this.guildId = guildId;
+        this.rankedUsers = rankedUsers;
     }
 
-    public String getName() {
-        return backgroundName;
+    public long getGuildId() {
+        return guildId;
     }
 
-    public String getImageURL() {
-        return backgroundURL;
+    public List<GuildRankedUser> getRankedUsers() {
+        return rankedUsers;
     }
 
 }

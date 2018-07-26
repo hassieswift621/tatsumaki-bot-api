@@ -14,15 +14,27 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:34.
+ * Created by Hassie on Tuesday, 24 July, 2018 - 18:55
  */
-public class TatsumakiJSONException extends Exception {
+public class Badge {
 
-    public TatsumakiJSONException(String message, Throwable cause) {
-        super(message, cause);
+    private final String imageUrl;
+    private final String name;
+
+    public Badge(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

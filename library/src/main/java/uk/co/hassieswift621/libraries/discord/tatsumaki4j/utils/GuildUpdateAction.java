@@ -14,6 +14,25 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils;
+
+/**
+ * Created by Hassie on Wednesday, 25 July, 2018 - 19:02
+ */
+public enum GuildUpdateAction {
+
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
+
+    private final String action;
+
+    GuildUpdateAction(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+}

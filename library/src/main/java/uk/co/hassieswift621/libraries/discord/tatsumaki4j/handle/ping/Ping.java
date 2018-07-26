@@ -14,6 +14,29 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping;
+
+import java.time.Instant;
+
+/**
+ * Created by Hassie on Wednesday, 25 July, 2018 - 11:38
+ */
+public class Ping {
+
+    private final String message;
+    private final Instant time;
+
+    public Ping(String message, Instant time) {
+        this.message = message;
+        this.time = time;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Instant getTime() {
+        return time;
+    }
+
+}
