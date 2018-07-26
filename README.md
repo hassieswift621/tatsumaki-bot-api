@@ -1,4 +1,4 @@
-Tatsumaki Bot API [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki-bot-api) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki-bot/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki-bot/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d965dfc58838444cb98eb199bc04e31a)](https://www.codacy.com/app/hassieswift621/tatsumaki-bot-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki-bot-api&amp;utm_campaign=Badge_Grade)
+Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d965dfc58838444cb98eb199bc04e31a)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
 =================
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
@@ -10,7 +10,7 @@ You can customise this using the client builder.
 
 The library is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
 
-Once you are done with the client, call its shutdown method to shutdown the executor service, to allow your program to shutdown.
+Once you are done with the client, call its shutdown method to shutdown the executor services, to allow your program to shutdown.
 Note however, you must create a new instance of the client if you wish to make another API request after shutting down the client.
 
 Note that I am not part of the Tatsumaki Bot development.
@@ -22,20 +22,20 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter. The latest version is 0.3.0
+This library is available on JCenter. The latest version is 0.4.0
 
 Replace ``{LATEST_VERSION}`` with the latest version.
 
 **Gradle Setup**
 ```gradle
-implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:{LATEST_VERSION}'
+implementation 'uk.co.hassieswift621.libraries.discord.tatsumaki4j:{LATEST_VERSION}'
 ```
 
 **Maven Setup**
 ```maven
 <dependency>
-  <groupId>uk.co.hassieswift621.libraries.discord.api</groupId>
-  <artifactId>tatsumaki-bot</artifactId>
+  <groupId>uk.co.hassieswift621.libraries.discord</groupId>
+  <artifactId>tatsumaki4j</artifactId>
   <version>{LATEST_VERSION}</version>
   <type>pom</type>
 </dependency>
@@ -43,7 +43,7 @@ implementation 'uk.co.hassieswift621.libraries.discord.api:tatsumaki-bot:{LATEST
 
 Tutorial
 --------
-**Retrieving user profile data**
+**Creating the client**
 ```java
 // Create the client with the default number of threads.
 TatsumakiClient tatsumakiClient = new TatsumakiClient("YOUR TATSUMAKI BOT TOKEN");
@@ -53,7 +53,10 @@ TatsumakiClient tatsumakiClient = new TatsumakiClient.Builder()
     .setThreadPoolSize(1)
     .setToken("YOUR TATSUMAKI BOT TOKEN")
     .build();
+```
 
+**Retrieving user profile data**
+```java
 // Request for user profile data for a user.
 tatsumakiClient.getUser("User ID",
     user -> {
@@ -68,6 +71,13 @@ tatsumakiClient.getUser("User ID",
 // Do other stuff here if required while the above request
 // is executed.
 ```
+
+**Other endpoints**
+- GET Guild Leaderboard: ``getGuildLeaderboard(guildId, Response<GuildLeaderboard> response, Error error)``
+- GET Guild User Stats: ``getGuildUserStats(guildId, userId, Response<GuildUserStats> response, Error error)``
+- GET Ping: ``getPing(Response<Ping> response, Error error)``
+- PUT Guild User Points: ``updateGuildUserPoints(guildId, userId, updateAction, amount, Response<GuildUserPoints> response, Error error)``
+- PUT Guild User Score: ``updateGuildUserScore(guildId, userId, updateAction, amount, Response<GuildUserScore> response, Error error)``
 
 **Shutting down the client**
 ```java

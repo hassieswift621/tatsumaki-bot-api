@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki-bot-api'
+rootProject.name = 'tatsumaki4j'
 include 'sample'
 include 'library'
