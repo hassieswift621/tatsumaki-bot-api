@@ -14,14 +14,27 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
 /**
- * Created by Hassie on Tuesday, 08 May, 2018 - 19:10.
+ * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
  */
-@FunctionalInterface
-public interface Response<T> {
+public class LevelProgress {
 
-    void onResponse(T response);
+    private final long currentXp;
+    private final long requiredXp;
+
+    public LevelProgress(long currentXp, long requiredXp) {
+        this.currentXp = currentXp;
+        this.requiredXp = requiredXp;
+    }
+
+    public long getCurrentXp() {
+        return currentXp;
+    }
+
+    public long getRequiredXp() {
+        return requiredXp;
+    }
 
 }

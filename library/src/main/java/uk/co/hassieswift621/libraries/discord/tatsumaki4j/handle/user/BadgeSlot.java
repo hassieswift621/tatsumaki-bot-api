@@ -14,29 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
-import java.time.Instant;
+import java.util.Optional;
 
 /**
- * Created by Hassie on Wednesday, 25 July, 2018 - 11:38
+ * Created by Hassie on Friday, 06 July, 2018 - 11:16
  */
-public class Ping {
+public class BadgeSlot {
 
-    private final String message;
-    private final Instant time;
+    private final Badge badge;
+    private final int slotNo;
 
-    public Ping(String message, Instant time) {
-        this.message = message;
-        this.time = time;
+    public BadgeSlot(Badge badge, int slotNo) {
+        this.badge = badge;
+        this.slotNo = slotNo;
     }
 
-    public String getMessage() {
-        return message;
+    public Optional<Badge> getBadge() {
+        return Optional.ofNullable(badge);
     }
 
-    public Instant getTime() {
-        return time;
+    public int getSlotNo() {
+        return slotNo;
     }
 
 }

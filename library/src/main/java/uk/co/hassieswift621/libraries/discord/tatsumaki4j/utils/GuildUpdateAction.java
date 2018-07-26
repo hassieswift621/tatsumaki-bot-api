@@ -14,33 +14,25 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils;
 
 /**
- * Created by Hassie on Wednesday, 25 July, 2018 - 20:55
+ * Created by Hassie on Wednesday, 25 July, 2018 - 19:02
  */
-public class GuildUserPoints {
+public enum GuildUpdateAction {
 
-    private final long guildId;
-    private final long points;
-    private final long userId;
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
 
-    public GuildUserPoints(long guildId, long points, long userId) {
-        this.guildId = guildId;
-        this.points = points;
-        this.userId = userId;
+    private final String action;
+
+    GuildUpdateAction(String action) {
+        this.action = action;
     }
 
-    public long getGuildId() {
-        return guildId;
-    }
-
-    public long getPoints() {
-        return points;
-    }
-
-    public long getUserId() {
-        return userId;
+    public String getAction() {
+        return action;
     }
 
 }

@@ -14,39 +14,33 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 20:42
+ * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
  */
-public class GuildUserStats {
+public class GuildRankedUser {
 
-    private final long guildId;
-    private final long points;
-    private final long score;
     private final long userId;
+    private final long rank;
+    private final long score;
 
-    public GuildUserStats(long guildId, long points, long score, long userId) {
-        this.guildId = guildId;
-        this.points = points;
-        this.score = score;
+    public GuildRankedUser(long userId, long rank, long score) {
         this.userId = userId;
-    }
-
-    public long getGuildId() {
-        return guildId;
-    }
-
-    public long getPoints() {
-        return points;
-    }
-
-    public long getScore() {
-        return score;
+        this.rank = rank;
+        this.score = score;
     }
 
     public long getUserId() {
         return userId;
+    }
+
+    public long getRank() {
+        return rank;
+    }
+
+    public long getScore() {
+        return score;
     }
 
 }

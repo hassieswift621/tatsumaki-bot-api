@@ -14,29 +14,14 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
-
-import java.util.List;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
+ * Created by Hassie on Tuesday, 08 May, 2018 - 19:10.
  */
-public class GuildLeaderboard {
+@FunctionalInterface
+public interface Response<T> {
 
-    private final long guildId;
-    private final List<GuildRankedUser> rankedUsers;
-
-    public GuildLeaderboard(long guildId, List<GuildRankedUser> rankedUsers) {
-        this.guildId = guildId;
-        this.rankedUsers = rankedUsers;
-    }
-
-    public long getGuildId() {
-        return guildId;
-    }
-
-    public List<GuildRankedUser> getRankedUsers() {
-        return rankedUsers;
-    }
+    void onResponse(T response);
 
 }

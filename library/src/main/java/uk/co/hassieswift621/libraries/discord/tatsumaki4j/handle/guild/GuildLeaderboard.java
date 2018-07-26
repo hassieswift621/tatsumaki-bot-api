@@ -14,19 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
+
+import java.util.List;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 11:21
+ * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
  */
-public class TatsumakiException extends RuntimeException {
+public class GuildLeaderboard {
 
-    public TatsumakiException(String message) {
-        super("Tatsumaki Bot API Exception - " + message);
+    private final long guildId;
+    private final List<GuildRankedUser> rankedUsers;
+
+    public GuildLeaderboard(long guildId, List<GuildRankedUser> rankedUsers) {
+        this.guildId = guildId;
+        this.rankedUsers = rankedUsers;
     }
 
-    public TatsumakiException(String message, Throwable cause) {
-        super("Tatsumaki Bot API Exception - " + message, cause);
+    public long getGuildId() {
+        return guildId;
+    }
+
+    public List<GuildRankedUser> getRankedUsers() {
+        return rankedUsers;
     }
 
 }

@@ -14,25 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping;
+
+import java.time.Instant;
 
 /**
- * Created by Hassie on Wednesday, 25 July, 2018 - 19:02
+ * Created by Hassie on Wednesday, 25 July, 2018 - 11:38
  */
-public enum GuildUpdateAction {
+public class Ping {
 
-    ADD("add"),
-    REMOVE("remove"),
-    SET("set");
+    private final String message;
+    private final Instant time;
 
-    private final String action;
-
-    GuildUpdateAction(String action) {
-        this.action = action;
+    public Ping(String message, Instant time) {
+        this.message = message;
+        this.time = time;
     }
 
-    public String getAction() {
-        return action;
+    public String getMessage() {
+        return message;
+    }
+
+    public Instant getTime() {
+        return time;
     }
 
 }

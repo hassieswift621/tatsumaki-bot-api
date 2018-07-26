@@ -14,27 +14,33 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 15:23.
+ * Created by Hassie on Wednesday, 25 July, 2018 - 20:55
  */
-public class LevelProgress {
+public class GuildUserPoints {
 
-    private final long currentXp;
-    private final long requiredXp;
+    private final long guildId;
+    private final long points;
+    private final long userId;
 
-    public LevelProgress(long currentXp, long requiredXp) {
-        this.currentXp = currentXp;
-        this.requiredXp = requiredXp;
+    public GuildUserPoints(long guildId, long points, long userId) {
+        this.guildId = guildId;
+        this.points = points;
+        this.userId = userId;
     }
 
-    public long getCurrentXp() {
-        return currentXp;
+    public long getGuildId() {
+        return guildId;
     }
 
-    public long getRequiredXp() {
-        return requiredXp;
+    public long getPoints() {
+        return points;
+    }
+
+    public long getUserId() {
+        return userId;
     }
 
 }

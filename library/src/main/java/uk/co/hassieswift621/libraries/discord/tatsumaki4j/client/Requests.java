@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
 
 import okhttp3.*;
 import okhttp3.Response;
 import org.json.JSONObject;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiException;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserPoints;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserScore;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.GuildUpdateAction;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.Parser;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.exceptions.TatsumakiException;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildLeaderboard;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserPoints;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserScore;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping.Ping;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user.TatsumakiUser;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils.GuildUpdateAction;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils.Parser;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
 import uk.co.hassieswift621.libraries.jsonio.exceptions.JsonIOException;
 
@@ -76,7 +76,7 @@ public class Requests {
     }
 
     public GuildUserPoints updateGuildUserPoints(long guildId, long userId, GuildUpdateAction action,
-                                                int amount) throws TatsumakiException {
+                                                 int amount) throws TatsumakiException {
         return Parser.parseGuildUserPoints(makePutRequest(
                 Endpoints.putGuildUserPoints(guildId, userId),
                 Parser.createGuildUserPointsRequest(action, amount)), guildId, userId);

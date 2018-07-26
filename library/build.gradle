@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-group = 'uk.co.hassieswift621.libraries.discord.api'
+group = 'uk.co.hassieswift621.libraries.discord'
 version = '0.4.0'
 
 apply plugin: 'java'
@@ -44,9 +44,9 @@ dependencies {
 
 publish {
     userOrg = 'hassieswift621'
-    groupId = 'uk.co.hassieswift621.libraries.discord.api'
-    artifactId = 'tatsumaki-bot'
+    groupId = 'uk.co.hassieswift621.libraries.discord'
+    artifactId = 'tatsumaki4j'
     publishVersion = '0.4.0'
     desc = 'An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.'
-    website = 'https://github.com/hassieswift621/tatsumaki-bot-api'
+    website = 'https://github.com/hassieswift621/tatsumaki4j'
 }

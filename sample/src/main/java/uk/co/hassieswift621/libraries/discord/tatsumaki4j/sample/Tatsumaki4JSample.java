@@ -14,25 +14,23 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.sample;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.sample;
 
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.TatsumakiClient;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.client.TatsumakiClient;
 
 /**
- * Created by Hassie on Saturday, 05 May, 2018 - 15:47.
+ * Created by Hassie on Thursday, 26 July, 2018 - 19:56
  */
-public class TatsumakiBotAPISample {
+public class Tatsumaki4JSample {
 
     public static void main(String[] args) {
 
-        // Create client with a custom thread pool size of 1.
-        TatsumakiClient tatsumakiClient = new TatsumakiClient.Builder()
-                .setThreadPoolSize(1)
-                .setToken("YOUR TATSUMAKI BOT TOKEN")
-                .build();
+        // Create client with default configuration.
+        TatsumakiClient tatsumakiClient = new TatsumakiClient("YOUR TATSUMAKI BOT TOKEN");
 
         // Get user profile data.
-        tatsumakiClient.getUser("USER ID",
+        tatsumakiClient.getUser(
+                "USER ID",
                 user -> {
                     // Success, output some stuff.
                     System.out.println("User's Background URL: " + user.getBackground().getImageUrl());
@@ -46,4 +44,5 @@ public class TatsumakiBotAPISample {
         // Shutdown the client to release resources to allow the program to exit.
         tatsumakiClient.shutdown();
     }
+
 }

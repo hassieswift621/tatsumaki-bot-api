@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
 
 import okhttp3.OkHttpClient;
 import uk.co.hassieswift621.libraries.asyncthreader.AsyncThreader;
 import uk.co.hassieswift621.libraries.asyncthreader.Request;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildLeaderboard;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserPoints;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserScore;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.GuildUserStats;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.TatsumakiUser;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils.GuildUpdateAction;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildLeaderboard;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserPoints;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserScore;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.GuildUserStats;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping.Ping;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user.TatsumakiUser;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils.GuildUpdateAction;
 
 /**
  * Created by Hassie on Saturday, 05 May, 2018 - 11:50.

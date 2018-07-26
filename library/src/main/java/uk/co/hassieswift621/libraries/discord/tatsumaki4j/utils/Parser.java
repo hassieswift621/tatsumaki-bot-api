@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.utils;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.client.Endpoints;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.exceptions.TatsumakiException;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.client.Endpoints;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.exceptions.TatsumakiException;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild.*;
-import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.ping.Ping;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping.Ping;
 import uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user.*;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild.*;
+import uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user.*;
 import uk.co.hassieswift621.libraries.jsonio.JsonIO;
 import uk.co.hassieswift621.libraries.jsonio.exceptions.JsonIOException;
 

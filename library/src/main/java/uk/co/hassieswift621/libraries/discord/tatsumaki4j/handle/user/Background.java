@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 18:55
+ * Created by Hassie on Friday, 06 July, 2018 - 11:18
  */
-public class Badge {
+public class Background {
 
     private final String imageUrl;
     private final String name;
 
-    public Badge(String imageUrl, String name) {
+    public Background(String imageUrl, String name) {
         this.imageUrl = imageUrl;
         this.name = name;
     }

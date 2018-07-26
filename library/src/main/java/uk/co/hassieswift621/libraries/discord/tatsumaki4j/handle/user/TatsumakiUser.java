@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
 import java.util.Map;
 

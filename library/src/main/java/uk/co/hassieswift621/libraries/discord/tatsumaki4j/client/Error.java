@@ -14,29 +14,14 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.user;
-
-import java.util.Optional;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
 
 /**
- * Created by Hassie on Friday, 06 July, 2018 - 11:16
+ * Created by Hassie on Tuesday, 08 May, 2018 - 19:13.
  */
-public class BadgeSlot {
+@FunctionalInterface
+public interface Error {
 
-    private final Badge badge;
-    private final int slotNo;
-
-    public BadgeSlot(Badge badge, int slotNo) {
-        this.badge = badge;
-        this.slotNo = slotNo;
-    }
-
-    public Optional<Badge> getBadge() {
-        return Optional.ofNullable(badge);
-    }
-
-    public int getSlotNo() {
-        return slotNo;
-    }
+    void onError(Throwable throwable);
 
 }

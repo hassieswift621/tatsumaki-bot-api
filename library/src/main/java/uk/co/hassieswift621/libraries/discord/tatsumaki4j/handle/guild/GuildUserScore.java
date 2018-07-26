@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.api.tatsumakibot.handle.guild;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
 /**
  * Created by Hassie on Wednesday, 25 July, 2018 - 19:51
