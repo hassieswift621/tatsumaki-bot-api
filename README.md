@@ -22,7 +22,7 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter. The latest version is 0.4.0
+This library is available on JCenter<sup>SOON<sup>&trade;</sup></sup>. The latest version is 0.5.0
 
 Replace ``{LATEST_VERSION}`` with the latest version.
 
