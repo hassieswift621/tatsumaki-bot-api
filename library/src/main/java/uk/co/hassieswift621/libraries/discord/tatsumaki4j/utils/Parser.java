@@ -192,7 +192,7 @@ public class Parser {
             long rank = json.getLong("rank");
             long reputation = json.getLong("reputation");
             String title = json.optString("title");
-            long totalXP = json.getLong("total_xp");
+            long totalXp = json.getLong("total_xp");
 
             // Background.
             String backgroundName = json.getString("background");
@@ -221,7 +221,7 @@ public class Parser {
             }
 
             return new TatsumakiUser(avatar, background, Collections.unmodifiableMap(badgeSlots), credits, infobox, level,
-                    levelProgress, name, rank, reputation, userId, title, totalXP);
+                    levelProgress, name, rank, reputation, userId, title, totalXp);
 
         } catch (IOException | JSONException | JsonIOException e) {
             throw new TatsumakiException("Failed to parse user response", e);

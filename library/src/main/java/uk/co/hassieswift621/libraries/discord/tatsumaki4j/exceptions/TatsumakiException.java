@@ -22,11 +22,11 @@ package uk.co.hassieswift621.libraries.discord.tatsumaki4j.exceptions;
 public class TatsumakiException extends RuntimeException {
 
     public TatsumakiException(String message) {
-        super("Tatsumaki Bot API Exception - " + message);
+        super("Tatsumaki4J Exception - " + message);
     }
 
     public TatsumakiException(String message, Throwable cause) {
-        super("Tatsumaki Bot API Exception - " + message, cause);
+        super("Tatsumaki4J Exception - " + message, cause);
     }
 
 }
