@@ -15,7 +15,7 @@
  */
 
 group = 'uk.co.hassieswift621.libraries.discord'
-version = '0.4.0'
+version = '0.5.0'
 
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
@@ -46,7 +46,7 @@ publish {
     userOrg = 'hassieswift621'
     groupId = 'uk.co.hassieswift621.libraries.discord'
     artifactId = 'tatsumaki4j'
-    publishVersion = '0.4.0'
+    publishVersion = '0.5.0'
     desc = 'An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.'
     website = 'https://github.com/hassieswift621/tatsumaki4j'
 }
