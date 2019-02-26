@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,93 +16,129 @@
 
 package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
-import java.util.Map;
+import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Hassie on Saturday, 05 May, 2018 - 11:36.
- */
+import java.util.Collections;
+import java.util.List;
+
 public class TatsumakiUser {
 
-    private final String avatar;
-    private final Background background;
-    private final Map<Integer, BadgeSlot> badgeSlots;
-    private final long credits;
-    private final String infobox;
-    private final long level;
-    private final LevelProgress levelProgress;
-    private final String name;
-    private final long rank;
-    private final long reputation;
-    private final long userId;
-    private final String title;
-    private final long totalXp;
+    @SerializedName("avatar_url")
+    private String avatar;
 
-    public TatsumakiUser(String avatar, Background background, Map<Integer, BadgeSlot> badgeSlots, long credits,
-                         String infobox, long level, LevelProgress levelProgress, String name, long rank,
-                         long reputation, long userId, String title, long totalXp) {
-        this.avatar = avatar;
-        this.background = background;
-        this.badgeSlots = badgeSlots;
-        this.credits = credits;
-        this.infobox = infobox;
-        this.level = level;
-        this.levelProgress = levelProgress;
-        this.name = name;
-        this.rank = rank;
-        this.reputation = reputation;
-        this.userId = userId;
-        this.title = title;
-        this.totalXp = totalXp;
-    }
+    @SerializedName("background")
+    private Background background;
 
+    @SerializedName("badgeSlots")
+    private List<BadgeSlot> badgeSlots;
+
+    @SerializedName("credits")
+    private long credits;
+
+    @SerializedName("info_box")
+    private String infobox;
+
+    @SerializedName("level")
+    private long level;
+
+    @SerializedName("xp")
+    private LevelProgress levelProgress;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("rank")
+    private long rank;
+
+    @SerializedName("reputation")
+    private long reputation;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("total_xp")
+    private long totalXp;
+
+    /**
+     * @return The user's avatar.
+     */
     public String getAvatar() {
         return avatar;
     }
 
+    /**
+     * @return The user's profile background.
+     */
     public Background getBackground() {
         return background;
     }
 
-    public Map<Integer, BadgeSlot> getBadgeSlots() {
-        return badgeSlots;
+    /**
+     * @return The user's profile badges.
+     */
+    public List<BadgeSlot> getBadgeSlots() {
+        return Collections.unmodifiableList(badgeSlots);
     }
 
+    /**
+     * @return The user's credits.
+     */
     public long getCredits() {
         return credits;
     }
 
+    /**
+     * @return The user's profile infobox.
+     */
     public String getInfobox() {
         return infobox;
     }
 
+    /**
+     * @return The user's level.
+     */
     public long getLevel() {
         return level;
     }
 
+    /**
+     * @return The user's level progress.
+     */
     public LevelProgress getLevelProgress() {
         return levelProgress;
     }
 
+    /**
+     * @return The user's Discord username.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return The user's rank.
+     */
     public long getRank() {
         return rank;
     }
 
+    /**
+     * @return The user's reputation.
+     */
     public long getReputation() {
         return reputation;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
+    /**
+     * @return The user's profile title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return The user's total XP.
+     */
     public long getTotalXp() {
         return totalXp;
     }

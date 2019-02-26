@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 import java.util.Optional;
 
 /**
- * Created by Hassie on Friday, 06 July, 2018 - 11:16
+ * Represents a user profile badge slot, containing a badge.
  */
 public class BadgeSlot {
 
@@ -31,10 +31,16 @@ public class BadgeSlot {
         this.slotNo = slotNo;
     }
 
+    /**
+     * @return A badge if the slot is not empty.
+     */
     public Optional<Badge> getBadge() {
         return Optional.ofNullable(badge);
     }
 
+    /**
+     * @return The slot number for this badge slot.
+     */
     public int getSlotNo() {
         return slotNo;
     }

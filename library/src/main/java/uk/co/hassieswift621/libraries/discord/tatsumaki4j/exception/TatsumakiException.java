@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.tatsumaki4j.exceptions;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.exception;
 
-/**
- * Created by Hassie on Tuesday, 24 July, 2018 - 11:21
- */
-public class TatsumakiException extends RuntimeException {
+public class TatsumakiException extends Exception {
 
     public TatsumakiException(String message) {
-        super("Tatsumaki4J Exception - " + message);
+        super("Tatsuamki API Exception - " + message);
     }
 
     public TatsumakiException(String message, Throwable cause) {
-        super("Tatsumaki4J Exception - " + message, cause);
+        super("Tatsumaki API Exception - " + message, cause);
     }
 
 }

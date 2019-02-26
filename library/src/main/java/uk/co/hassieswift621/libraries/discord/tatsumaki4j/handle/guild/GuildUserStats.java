@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,35 +16,49 @@
 
 package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 20:42
+ * Represents a user's stats in a guild.
  */
 public class GuildUserStats {
 
-    private final long guildId;
-    private final long points;
-    private final long score;
-    private final long userId;
+    @SerializedName("guild_id")
+    private long guildId;
 
-    public GuildUserStats(long guildId, long points, long score, long userId) {
-        this.guildId = guildId;
-        this.points = points;
-        this.score = score;
-        this.userId = userId;
-    }
+    @SerializedName("points")
+    private long points;
 
+    @SerializedName("score")
+    private long score;
+
+    @SerializedName("user_id")
+    private long userId;
+
+    /**
+     * @return The guild ID.
+     */
     public long getGuildId() {
         return guildId;
     }
 
+    /**
+     * @return The user's points in the guild.
+     */
     public long getPoints() {
         return points;
     }
 
+    /**
+     * @return The user's score in the guild.
+     */
     public long getScore() {
         return score;
     }
 
+    /**
+     * @return The user's ID.
+     */
     public long getUserId() {
         return userId;
     }

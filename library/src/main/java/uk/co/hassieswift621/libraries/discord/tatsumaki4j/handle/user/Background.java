@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.user;
 
 /**
- * Created by Hassie on Friday, 06 July, 2018 - 11:18
+ * Represents a user profile background.
  */
 public class Background {
 
@@ -29,10 +29,16 @@ public class Background {
         this.name = name;
     }
 
+    /**
+     * @return The background image URL.
+     */
     public String getImageUrl() {
         return imageUrl;
     }
 
+    /**
+     * @return The name of the background.
+     */
     public String getName() {
         return name;
     }

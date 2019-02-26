@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,17 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.tatsumaki4j.utils;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.error;
 
-/**
- * Created by Hassie on Wednesday, 25 July, 2018 - 19:02
- */
-public enum GuildUpdateAction {
+import com.google.gson.annotations.SerializedName;
 
-    ADD("add"),
-    REMOVE("remove"),
-    SET("set");
+public class TatsumakiError {
 
-    private final String action;
+    @SerializedName("message")
+    private String message;
 
-    GuildUpdateAction(String action) {
-        this.action = action;
-    }
-
-    public String getAction() {
-        return action;
+    public String getMessage() {
+        return message;
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,28 +14,29 @@
  * limitations under the License.
  */
 
-package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
+package uk.co.hassieswift621.libraries.discord.tatsumaki4j.rest;
 
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 11:58
+ * Tatsumaki API endpoints.
  */
-public class Endpoints {
+public class Endpoint {
 
     private static final String BASE_URL = "https://api.tatsumaki.xyz/";
 
-    private static final String BACKGROUND_IMAGE = "https://www.tatsumaki.xyz/images/backgrounds/profile/";
-    private static final String BADGE_IMAGE = "https://www.tatsumaki.xyz/images/badges/";
+    public static final String BACKGROUND_IMAGE = "https://www.tatsumaki.xyz/images/backgrounds/profile/";
+    public static final String BADGE_IMAGE = "https://www.tatsumaki.xyz/images/badges/";
+    public static final String IMAGE_EXT = ".png";
 
     private static final String GUILDS = "guilds/";
-    private static final String PING = "ping/";
+    private static final String PING = "ping";
     private static final String USERS = "users/";
 
     public static String getBackgroundImage(String backgroundName) {
-        return BACKGROUND_IMAGE + backgroundName + ".png";
+        return BACKGROUND_IMAGE + backgroundName + IMAGE_EXT;
     }
 
     public static String getBadgeImage(String badgeName) {
-        return BADGE_IMAGE + badgeName + ".png";
+        return BADGE_IMAGE + badgeName + IMAGE_EXT;
     }
 
     public static String getGuildLeaderboard(long guildId) {

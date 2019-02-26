@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,24 +19,31 @@ package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.ping;
 import java.time.Instant;
 
 /**
- * Created by Hassie on Wednesday, 25 July, 2018 - 11:38
+ * Represents a ping response.
  */
 public class Ping {
 
     private final String message;
-    private final Instant time;
+    private final Instant timestamp;
 
-    public Ping(String message, Instant time) {
+    public Ping(String message, Instant timestamp) {
         this.message = message;
-        this.time = time;
+        this.timestamp = timestamp;
     }
 
+    /**
+     * @return The response message.
+     */
     public String getMessage() {
         return message;
     }
 
-    public Instant getTime() {
-        return time;
+    /**
+     *
+     * @return The ping receive timestamp.
+     */
+    public Instant getTimestamp() {
+        return timestamp;
     }
 
 }

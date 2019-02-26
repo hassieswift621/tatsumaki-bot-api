@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,31 +16,41 @@
 
 package uk.co.hassieswift621.libraries.discord.tatsumaki4j.handle.guild;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * Created by Hassie on Tuesday, 24 July, 2018 - 12:53
+ * Represents a ranked user in a guild leaderboard.
  */
 public class GuildRankedUser {
 
-    private final long userId;
-    private final long rank;
-    private final long score;
+    @SerializedName("rank")
+    private long rank;
 
-    public GuildRankedUser(long userId, long rank, long score) {
-        this.userId = userId;
-        this.rank = rank;
-        this.score = score;
-    }
+    @SerializedName("score")
+    private long score;
 
-    public long getUserId() {
-        return userId;
-    }
+    @SerializedName("user_id")
+    private long userId;
 
+    /**
+     * @return The rank of the user in the guild leadeerboard.
+     */
     public long getRank() {
         return rank;
     }
 
+    /**
+     * @return The user's score in the guild.
+     */
     public long getScore() {
         return score;
+    }
+
+    /**
+     * @return The user's ID.
+     */
+    public long getUserId() {
+        return userId;
     }
 
 }

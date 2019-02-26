@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,6 @@
 
 package uk.co.hassieswift621.libraries.discord.tatsumaki4j.client;
 
-/**
- * Created by Hassie on Tuesday, 08 May, 2018 - 19:13.
- */
 @FunctionalInterface
 public interface Error {
 
