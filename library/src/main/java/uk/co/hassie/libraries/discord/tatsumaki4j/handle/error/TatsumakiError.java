@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.error;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Represents a Tatsumaki API error.
+ */
+public class TatsumakiError {
+
+    @SerializedName("message")
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+}

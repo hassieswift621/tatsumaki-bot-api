@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.client;
+
+@FunctionalInterface
+public interface Error {
+
+    void onError(Throwable throwable);
+
+}

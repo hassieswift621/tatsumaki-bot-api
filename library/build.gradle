@@ -1,5 +1,5 @@
 /*
- * Copyright ©2018 HassieSwift621.
+ * Copyright ©2018-2019 Hassie.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,39 +14,40 @@
  * limitations under the License.
  */
 
-group = 'uk.co.hassieswift621.libraries.discord'
-version = '0.5.0'
-
-apply plugin: 'java'
-apply plugin: 'com.novoda.bintray-release'
-
-sourceCompatibility = 1.8
-
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.novoda:bintray-release:0.8.1'
+        classpath 'com.novoda:bintray-release:0.9'
     }
 }
+
+plugins {
+    id 'java'
+}
+apply plugin: 'com.novoda.bintray-release'
+
+group = 'uk.co.hassie.libraries.discord'
+version = '0.6.0'
+
+sourceCompatibility = 1.8
 
 repositories {
     jcenter()
 }
 
 dependencies {
-    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    implementation 'org.json:json:20180130'
-    implementation 'uk.co.hassieswift621.libraries:async-threader:2.0.2'
-    implementation 'uk.co.hassieswift621.libraries:json-io:1.2.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'uk.co.hassie.libraries:async-threader:2.2.0'
 }
 
 publish {
     userOrg = 'hassieswift621'
-    groupId = 'uk.co.hassieswift621.libraries.discord'
+    groupId = 'uk.co.hassie.libraries.discord'
     artifactId = 'tatsumaki4j'
-    publishVersion = '0.5.0'
+    publishVersion = '0.6.0'
     desc = 'An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.'
     website = 'https://github.com/hassieswift621/tatsumaki4j'
 }

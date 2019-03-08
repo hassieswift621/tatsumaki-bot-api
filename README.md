@@ -1,17 +1,15 @@
-Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a3201cbae39443529dbef24e360b7f28)](https://www.codacy.com/project/hassieswift621/tatsumaki4d4j/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4d4j&amp;utm_campaign=Badge_Grade_Dashboard)
-=================
+Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/335e92d087d54acd903daee641e91a45)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
 
-The API wrapper has all endpoints currently available or soon to be available implemented: guilds, users and ping.
+The API wrapper has all endpoints implemented: guilds, users and ping.
 
 When you create the client, by default a number of fixed threads are created, specifically CPUs/CPU cores + 1.
 You can customise this using the client builder.
 
-The library is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
-
-Once you are done with the client, call its shutdown method to shutdown the executor services, to allow your program to shutdown.
-Note however, you must create a new instance of the client if you wish to make another API request after shutting down the client.
+The client is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
+Once you are done with the client, call its close method to shutdown the executor services, which will keep your program alive.
+However, you must create a new instance of the client if you wish to make another API request after closing the client.
 
 Note that I am not part of the Tatsumaki Bot development.
 If you have any queries about the bot or the API, please visit https://tatsumaki.xyz/
@@ -22,19 +20,19 @@ To get an API key, run the following command on Tatsumaki: **t!apikey**
 
 Dependencies
 ------------
-This library is available on JCenter<sup>SOON<sup>&trade;</sup></sup>. The latest version is 0.5.0
+This library is available on JCenter. The latest version is 0.6.0
 
 Replace ``{LATEST_VERSION}`` with the latest version.
 
 **Gradle Setup**
 ```gradle
-implementation 'uk.co.hassieswift621.libraries.discord.tatsumaki4j:{LATEST_VERSION}'
+implementation 'uk.co.hassie.libraries.discord.tatsumaki4j:{LATEST_VERSION}'
 ```
 
 **Maven Setup**
 ```maven
 <dependency>
-  <groupId>uk.co.hassieswift621.libraries.discord</groupId>
+  <groupId>uk.co.hassie.libraries.discord</groupId>
   <artifactId>tatsumaki4j</artifactId>
   <version>{LATEST_VERSION}</version>
   <type>pom</type>
@@ -79,14 +77,14 @@ tatsumakiClient.getUser("User ID",
 - PUT Guild User Points: ``updateGuildUserPoints(guildId, userId, updateAction, amount, Response<GuildUserPoints> response, Error error)``
 - PUT Guild User Score: ``updateGuildUserScore(guildId, userId, updateAction, amount, Response<GuildUserScore> response, Error error)``
 
-**Shutting down the client**
+**Closing the client**
 ```java
-tatsumakiClient.shutdown();
+tatsumakiClient.close();
 ```
 
 License
 -------
-Copyright &copy;2018 HassieSwift621.
+Copyright &copy;2018-2019 Hassie.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -14,6 +14,33 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.user;
+
+/**
+ * Represents a user profile background.
+ */
+public class Background {
+
+    private final String imageUrl;
+    private final String name;
+
+    public Background(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+    /**
+     * @return The background image URL.
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @return The name of the background.
+     */
+    public String getName() {
+        return name;
+    }
+
+}

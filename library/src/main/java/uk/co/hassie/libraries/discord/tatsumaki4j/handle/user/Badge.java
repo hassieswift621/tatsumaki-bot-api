@@ -14,6 +14,33 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.user;
+
+/**
+ * Represents a user profile badge.
+ */
+public class Badge {
+
+    private final String imageUrl;
+    private final String name;
+
+    public Badge(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
+
+    /**
+     * @return The badge image URL.
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @return The badge name.
+     */
+    public String getName() {
+        return name;
+    }
+
+}

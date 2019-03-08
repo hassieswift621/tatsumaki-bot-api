@@ -14,6 +14,23 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Represents a response from updating a user's guild points.
+ */
+public class GuildUserPoints {
+
+    @SerializedName("points")
+    private long points;
+
+    /**
+     * @return The adjusted points.
+     */
+    public long getPoints() {
+        return points;
+    }
+
+}

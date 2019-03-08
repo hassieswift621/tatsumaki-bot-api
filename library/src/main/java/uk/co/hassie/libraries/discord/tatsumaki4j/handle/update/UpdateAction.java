@@ -14,6 +14,26 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.update;
+
+/**
+ * Update action types.
+ */
+public enum UpdateAction {
+
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
+
+    private final String action;
+
+    UpdateAction(String action) {
+        this.action = action;
+    }
+
+    @Override
+    public String toString() {
+        return action;
+    }
+
+}

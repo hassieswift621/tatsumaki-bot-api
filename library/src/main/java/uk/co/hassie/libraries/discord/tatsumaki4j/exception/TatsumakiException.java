@@ -14,6 +14,16 @@
  * limitations under the License.
  */
 
-rootProject.name = 'tatsumaki4j'
-include 'sample'
-include 'library'
+package uk.co.hassie.libraries.discord.tatsumaki4j.exception;
+
+public class TatsumakiException extends Exception {
+
+    public TatsumakiException(String message) {
+        super("Tatsuamki API Exception - " + message);
+    }
+
+    public TatsumakiException(String message, Throwable cause) {
+        super("Tatsumaki API Exception - " + message, cause);
+    }
+
+}
