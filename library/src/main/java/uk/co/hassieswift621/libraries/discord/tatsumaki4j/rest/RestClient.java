@@ -30,7 +30,7 @@ import uk.co.hassieswift621.libraries.discord.tatsumaki4j.parser.Parser;
 import java.util.Collections;
 import java.util.List;
 
-public class RestClient {
+public class RestClient implements AutoCloseable {
 
     // User Agent consts.
     private static final String UA_NAME = "Tatsumaki4J";
@@ -186,6 +186,15 @@ public class RestClient {
             // Throw.
             throw new TatsumakiException("Failed to get user with ID " + userId, e);
         }
+    }
+
+    /**
+     * Closes the rest client by shutting down the executor services.
+     */
+    @Override
+    public void close() {
+        // Shutdown OkHttp.
+        httpClient.dispatcher().executorService().shutdown();
     }
 
 }

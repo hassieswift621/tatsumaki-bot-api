@@ -33,24 +33,22 @@ class RateLimiter {
         lastRequest = System.currentTimeMillis();
     }
 
-    public void acquire() throws InterruptedException {
-        synchronized (this) {
-            // Get current time.
-            long currentTime = System.currentTimeMillis();
+    public synchronized void acquire() throws InterruptedException {
+        // Get current time.
+        long currentTime = System.currentTimeMillis();
 
-            // Check if the current time is greater than the rate limit reset time.
-            if (currentTime >= lastRequest + resetInterval) {
-                // Allow request.
-                lastRequest = currentTime;
-                return;
-            }
-
-            // Sleep for the time difference.
-            Thread.sleep((lastRequest + resetInterval) - currentTime);
-
+        // Check if the current time is greater than the rate limit reset time.
+        if (currentTime >= lastRequest + resetInterval) {
             // Allow request.
-            lastRequest = System.currentTimeMillis();
+            lastRequest = currentTime;
+            return;
         }
+
+        // Sleep for the time difference.
+        Thread.sleep((lastRequest + resetInterval) - currentTime);
+
+        // Allow request.
+        lastRequest = System.currentTimeMillis();
     }
 
 }

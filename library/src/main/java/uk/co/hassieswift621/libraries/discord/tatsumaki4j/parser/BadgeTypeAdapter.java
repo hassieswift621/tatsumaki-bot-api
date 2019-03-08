@@ -59,7 +59,7 @@ public class BadgeTypeAdapter extends TypeAdapter<List<BadgeSlot>> {
                     badgeSlots.add(new BadgeSlot(new Badge(null, badgeName), i));
                 } else {
                     badgeSlots.add(new BadgeSlot(
-                            new Badge(Endpoint.BADGE_IMAGE + badgeName + Endpoint.IMAGE_EXT, badgeName), i));
+                            new Badge(Endpoint.getBadgeImage(badgeName), badgeName), i));
                 }
             }
         }

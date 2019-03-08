@@ -24,7 +24,7 @@ public class Endpoint {
     private static final String BASE_URL = "https://api.tatsumaki.xyz/";
 
     public static final String BACKGROUND_IMAGE = "https://www.tatsumaki.xyz/images/backgrounds/profile/";
-    public static final String BADGE_IMAGE = "https://www.tatsumaki.xyz/images/badges/";
+    private static final String BADGE_IMAGE = "https://www.tatsumaki.xyz/images/badges/";
     public static final String IMAGE_EXT = ".png";
 
     private static final String GUILDS = "guilds/";

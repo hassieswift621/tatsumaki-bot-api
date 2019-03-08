@@ -26,13 +26,65 @@ import uk.co.hassieswift621.libraries.discord.tatsumaki4j.rest.RestClient;
 
 import java.util.List;
 
-public class TatsumakiClient {
+public class TatsumakiClient implements AutoCloseable {
 
     private final AsyncThreader asyncThreader;
     private final RestClient restClient;
 
+    /**
+     * Tatsumaki client builder.
+     */
+    public static class Builder {
+
+        private int threadPoolSize;
+        private String token;
+
+        /**
+         * Sets the thread pool size.
+         *
+         * @param threadPoolSize The thread pool size.
+         * @return The builder instance.
+         */
+        public Builder setThreadPoolSize(int threadPoolSize) {
+            this.threadPoolSize = threadPoolSize;
+            return this;
+        }
+
+        /**
+         * Sets the API token.
+         *
+         * @param token The API token
+         * @return The builder instance.
+         */
+        public Builder setToken(String token) {
+            this.token = token;
+            return this;
+        }
+
+        /**
+         * Builds the Tatsumaki client.
+         *
+         * @return The Tatsumaki client instance.
+         */
+        public TatsumakiClient build() {
+            if (threadPoolSize > 0) {
+                return new TatsumakiClient(new AsyncThreader.Builder()
+                        .setThreadPoolSize(threadPoolSize)
+                        .build(), token);
+            } else {
+                return new TatsumakiClient(token);
+            }
+        }
+
+    }
+
     public TatsumakiClient(String token) {
         asyncThreader = new AsyncThreader();
+        restClient = new RestClient(token);
+    }
+
+    private TatsumakiClient(AsyncThreader asyncThreader, String token) {
+        this.asyncThreader = asyncThreader;
         restClient = new RestClient(token);
     }
 
@@ -100,8 +152,14 @@ public class TatsumakiClient {
         asyncThreader.execute(request);
     }
 
-    public void shutdown() {
+    /**
+     * Closes the Tatsumaki client by shutting down the executor services.
+     */
+    @Override
+    public void close() {
+        // Shutdown async threader and close rest client.
         asyncThreader.shutdown();
+        restClient.close();
     }
 
 }
