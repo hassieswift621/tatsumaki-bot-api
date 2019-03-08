@@ -1,4 +1,4 @@
-Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d965dfc58838444cb98eb199bc04e31a)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
+Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/335e92d087d54acd903daee641e91a45)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
 =================
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
@@ -9,11 +9,7 @@ When you create the client, by default a number of fixed threads are created, sp
 You can customise this using the client builder.
 
 The client is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
-
 Once you are done with the client, call its close method to shutdown the executor services, which will keep your program alive.
-
-You can also use the client with try with resources catch block if you plan to make one off requests, or if you wish to close the client after each request.
-
 However, you must create a new instance of the client if you wish to make another API request after closing the client.
 
 Note that I am not part of the Tatsumaki Bot development.
@@ -75,8 +71,6 @@ tatsumakiClient.getUser("User ID",
 // is executed.
 ```
 
-**Try with resources block**
-
 **Other endpoints**
 - GET Guild Leaderboard: ``getGuildLeaderboard(guildId, Response<GuildLeaderboard> response, Error error)``
 - GET Guild User Stats: ``getGuildUserStats(guildId, userId, Response<GuildUserStats> response, Error error)``
@@ -84,14 +78,14 @@ tatsumakiClient.getUser("User ID",
 - PUT Guild User Points: ``updateGuildUserPoints(guildId, userId, updateAction, amount, Response<GuildUserPoints> response, Error error)``
 - PUT Guild User Score: ``updateGuildUserScore(guildId, userId, updateAction, amount, Response<GuildUserScore> response, Error error)``
 
-**Closing down the client**
+**Closing the client**
 ```java
 tatsumakiClient.close();
 ```
 
 License
 -------
-Copyright &copy;2018 HassieSwift621.
+Copyright &copy;2018-2019 Hassie.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
