@@ -16,11 +16,14 @@
 
 package uk.co.hassie.libraries.discord.tatsumaki4j.client;
 
-import uk.co.hassieswift621.libraries.asyncthreader.AsyncThreader;
-import uk.co.hassieswift621.libraries.asyncthreader.Request;
+import uk.co.hassie.libraries.asyncthreader.AsyncThreader;
+import uk.co.hassie.libraries.asyncthreader.Request;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildRankedUser;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserPoints;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserScore;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserStats;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.ping.Ping;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.update.UpdateAction;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.user.TatsumakiUser;
 import uk.co.hassie.libraries.discord.tatsumaki4j.rest.RestClient;
 
@@ -146,6 +149,46 @@ public class TatsumakiClient implements AutoCloseable {
     public void getUser(long userId, Response<TatsumakiUser> response, Error error) {
         Request<TatsumakiUser> request = new Request<>(
                 () -> restClient.getUser(userId),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
+     * Updates a user's points in a guild.
+     *
+     * @param guildId      The guild ID.
+     * @param userId       The user's ID.
+     * @param updateAction The type of update action.
+     * @param amount       The amount to update the user's points by.
+     * @param response     The response callback.
+     * @param error        The error callback.
+     */
+    public void updateGuildUserPoints(long guildId, long userId, UpdateAction updateAction, int amount,
+                                      Response<GuildUserPoints> response, Error error) {
+        Request<GuildUserPoints> request = new Request<>(
+                () -> restClient.putGuildUserPoints(guildId, userId, updateAction, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
+     * Updates a user's score in a guild.
+     *
+     * @param guildId      The guild ID.
+     * @param userId       The user's ID.
+     * @param updateAction The type of update action.
+     * @param amount       The amount to update the user's score by.
+     * @param response     The response callback.
+     * @param error        The error callback.
+     */
+    public void updateGuildUserScore(long guildId, long userId, UpdateAction updateAction, int amount,
+                                     Response<GuildUserScore> response, Error error) {
+        Request<GuildUserScore> request = new Request<>(
+                () -> restClient.putGuildUserScore(guildId, userId, updateAction, amount),
                 response::onResponse,
                 error::onError
         );

@@ -17,15 +17,20 @@
 package uk.co.hassie.libraries.discord.tatsumaki4j.rest;
 
 import com.google.gson.reflect.TypeToken;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
+import uk.co.hassie.libraries.discord.tatsumaki4j.exception.TatsumakiException;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.error.TatsumakiError;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildRankedUser;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserPoints;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserScore;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild.GuildUserStats;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.ping.Ping;
+import uk.co.hassie.libraries.discord.tatsumaki4j.handle.update.UpdateAction;
 import uk.co.hassie.libraries.discord.tatsumaki4j.handle.user.TatsumakiUser;
 import uk.co.hassie.libraries.discord.tatsumaki4j.parser.Parser;
-import uk.co.hassie.libraries.discord.tatsumaki4j.exception.TatsumakiException;
 
 import java.util.Collections;
 import java.util.List;
@@ -188,9 +193,80 @@ public class RestClient implements AutoCloseable {
         }
     }
 
-    /**
-     * Closes the rest client by shutting down the executor services.
-     */
+    public GuildUserPoints putGuildUserPoints(long guildId, long userId, UpdateAction updateAction,
+                                              int amount) throws TatsumakiException {
+        try {
+            // Create request body.
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                    parser.createGuildUpdateRequest(updateAction, amount));
+
+            // Create request.
+            Request request = new Request.Builder()
+                    .put(body)
+                    .url(Endpoint.putGuildUserPoints(guildId, userId))
+                    .build();
+
+            // Wait for rate limit clearance.
+            rateLimiter.acquire();
+
+            // Execute request.
+            okhttp3.Response response = httpClient.newCall(request).execute();
+
+            // Check if response was successful.
+            if (response.isSuccessful()) {
+                return parser.parse(response.body().string(), GuildUserPoints.class);
+            } else {
+                // Else, parse error response.
+                TatsumakiError error = parser.parse(response.body().string(), TatsumakiError.class);
+
+                // Throw.
+                throw new TatsumakiException("Failed to update guild user points with guild ID " + guildId
+                        + " and user ID " + userId + ": " + error.getMessage());
+            }
+        } catch (Exception e) {
+            // Throw.
+            throw new TatsumakiException("Failed to update guild user points with guild ID " + guildId
+                    + " and user ID " + userId, e);
+        }
+    }
+
+    public GuildUserScore putGuildUserScore(long guildId, long userId, UpdateAction updateAction,
+                                              int amount) throws TatsumakiException {
+        try {
+            // Create request body.
+            RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
+                    parser.createGuildUpdateRequest(updateAction, amount));
+
+            // Create request.
+            Request request = new Request.Builder()
+                    .put(body)
+                    .url(Endpoint.putGuildUserScore(guildId, userId))
+                    .build();
+
+            // Wait for rate limit clearance.
+            rateLimiter.acquire();
+
+            // Execute request.
+            okhttp3.Response response = httpClient.newCall(request).execute();
+
+            // Check if response was successful.
+            if (response.isSuccessful()) {
+                return parser.parse(response.body().string(), GuildUserScore.class);
+            } else {
+                // Else, parse error response.
+                TatsumakiError error = parser.parse(response.body().string(), TatsumakiError.class);
+
+                // Throw.
+                throw new TatsumakiException("Failed to update guild user score with guild ID " + guildId
+                        + " and user ID " + userId + ": " + error.getMessage());
+            }
+        } catch (Exception e) {
+            // Throw.
+            throw new TatsumakiException("Failed to update guild user score with guild ID " + guildId
+                    + " and user ID " + userId, e);
+        }
+    }
+
     @Override
     public void close() {
         // Shutdown OkHttp.

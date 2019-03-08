@@ -14,20 +14,26 @@
  * limitations under the License.
  */
 
-package uk.co.hassie.libraries.discord.tatsumaki4j.handle.error;
-
-import com.google.gson.annotations.SerializedName;
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.update;
 
 /**
- * Represents a Tatsumaki API error.
+ * Update action types.
  */
-public class TatsumakiError {
+public enum UpdateAction {
 
-    @SerializedName("message")
-    private String message;
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
 
-    public String getMessage() {
-        return message;
+    private final String action;
+
+    UpdateAction(String action) {
+        this.action = action;
+    }
+
+    @Override
+    public String toString() {
+        return action;
     }
 
 }

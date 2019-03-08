@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-package uk.co.hassie.libraries.discord.tatsumaki4j.handle.error;
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Represents a Tatsumaki API error.
+ * Represents a response from updating a user's guild points.
  */
-public class TatsumakiError {
+public class GuildUserPoints {
 
-    @SerializedName("message")
-    private String message;
+    @SerializedName("points")
+    private long points;
 
-    public String getMessage() {
-        return message;
+    /**
+     * @return The adjusted points.
+     */
+    public long getPoints() {
+        return points;
     }
 
 }

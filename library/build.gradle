@@ -40,11 +40,11 @@ repositories {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
-    implementation 'uk.co.hassieswift621.libraries:async-threader:2.0.2'
+    implementation 'uk.co.hassie.libraries:async-threader:2.2.0'
 }
 
 publish {
-    userOrg = 'hassie'
+    userOrg = 'hassieswift621'
     groupId = 'uk.co.hassie.libraries.discord'
     artifactId = 'tatsumaki4j'
     publishVersion = '0.6.0'

@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-package uk.co.hassie.libraries.discord.tatsumaki4j.rest;
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.guild;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Update action types.
+ * Represents a response from updating a user's guild score.
  */
-public enum UpdateAction {
+public class GuildUserScore {
 
-    ADD("add"),
-    REMOVE("remove"),
-    SET("set");
+    @SerializedName("score")
+    private long score;
 
-    private final String action;
-
-    UpdateAction(String action) {
-        this.action = action;
-    }
-
-    @Override
-    public String toString() {
-        return action;
+    /**
+     * @return The adjusted score.
+     */
+    public long getScore() {
+        return score;
     }
 
 }
