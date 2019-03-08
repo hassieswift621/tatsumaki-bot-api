@@ -27,7 +27,7 @@ public class Tatsumaki4JSample {
 
         // Get user profile data.
         tatsumakiClient.getUser(
-                Long.parseLong("USER ID"),
+                "USER ID",
                 user -> {
                     // Success, output some stuff.
                     System.out.println("User's Background URL: " + user.getBackground().getImageUrl());

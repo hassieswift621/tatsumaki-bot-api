@@ -101,6 +101,10 @@ public class RestClient {
         }
     }
 
+    public List<GuildRankedUser> getGuildLeaderboard(String guildId) throws TatsumakiException {
+        return getGuildLeaderboard(parser.parseSnowflake(guildId));
+    }
+
     public GuildUserStats getGuildUserStats(long guildId, long userId) throws TatsumakiException {
         try {
             // Create request.
@@ -131,6 +135,10 @@ public class RestClient {
             throw new TatsumakiException("Failed to get guild user stats with guild ID " + guildId +
                     " and user ID " + userId + guildId, e);
         }
+    }
+
+    public GuildUserStats getGuildUserStats(String guildId, String userId) throws TatsumakiException {
+        return getGuildUserStats(parser.parseSnowflake(guildId), parser.parseSnowflake(userId));
     }
 
     public Ping getPing() throws TatsumakiException {
@@ -193,6 +201,10 @@ public class RestClient {
         }
     }
 
+    public TatsumakiUser getUser(String userId) throws TatsumakiException {
+        return getUser(parser.parseSnowflake(userId));
+    }
+
     public GuildUserPoints putGuildUserPoints(long guildId, long userId, UpdateAction updateAction,
                                               int amount) throws TatsumakiException {
         try {
@@ -230,6 +242,11 @@ public class RestClient {
         }
     }
 
+    public GuildUserPoints putGuildUserPoints(String guildId, String userId, UpdateAction updateAction,
+                                              int amount) throws TatsumakiException {
+        return putGuildUserPoints(parser.parseSnowflake(guildId), parser.parseSnowflake(userId), updateAction, amount);
+    }
+
     public GuildUserScore putGuildUserScore(long guildId, long userId, UpdateAction updateAction,
                                             int amount) throws TatsumakiException {
         try {
@@ -265,6 +282,11 @@ public class RestClient {
             throw new TatsumakiException("Failed to update guild user score with guild ID " + guildId
                     + " and user ID " + userId, e);
         }
+    }
+
+    public GuildUserScore putGuildUserScore(String guildId, String userId, UpdateAction updateAction,
+                                            int amount) throws TatsumakiException {
+        return putGuildUserScore(parser.parseSnowflake(guildId), parser.parseSnowflake(userId), updateAction, amount);
     }
 
     public void close() {

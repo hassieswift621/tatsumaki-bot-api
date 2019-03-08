@@ -72,4 +72,12 @@ public class Parser {
         return json.toString();
     }
 
+    public long parseSnowflake(String snowflake) throws TatsumakiException {
+        try {
+            return Long.parseUnsignedLong(snowflake);
+        } catch (NumberFormatException e) {
+            throw new TatsumakiException("The supplied snowflake ID is not valid", e);
+        }
+    }
+
 }

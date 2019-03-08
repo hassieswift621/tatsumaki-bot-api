@@ -108,6 +108,22 @@ public class TatsumakiClient {
     }
 
     /**
+     * Gets the leaderboard for a guild.
+     *
+     * @param guildId  The guild ID.
+     * @param response The response callback.
+     * @param error    The error callback.
+     */
+    public void getGuildLeaderboard(String guildId, Response<List<GuildRankedUser>> response, Error error) {
+        Request<List<GuildRankedUser>> request = new Request<>(
+                () -> restClient.getGuildLeaderboard(guildId),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
      * Gets a user's stats for a guild.
      *
      * @param guildId  The guild ID.
@@ -116,6 +132,23 @@ public class TatsumakiClient {
      * @param error    The error callback.
      */
     public void getGuildUserStats(long guildId, long userId, Response<GuildUserStats> response, Error error) {
+        Request<GuildUserStats> request = new Request<>(
+                () -> restClient.getGuildUserStats(guildId, userId),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
+     * Gets a user's stats for a guild.
+     *
+     * @param guildId  The guild ID.
+     * @param userId   The user ID.
+     * @param response The response callback.
+     * @param error    The error callback.
+     */
+    public void getGuildUserStats(String guildId, String userId, Response<GuildUserStats> response, Error error) {
         Request<GuildUserStats> request = new Request<>(
                 () -> restClient.getGuildUserStats(guildId, userId),
                 response::onResponse,
@@ -156,6 +189,22 @@ public class TatsumakiClient {
     }
 
     /**
+     * Gets a Tatsumaki user.
+     *
+     * @param userId   The user's ID.
+     * @param response The response callback.
+     * @param error    The error callback.
+     */
+    public void getUser(String userId, Response<TatsumakiUser> response, Error error) {
+        Request<TatsumakiUser> request = new Request<>(
+                () -> restClient.getUser(userId),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
      * Updates a user's points in a guild.
      *
      * @param guildId      The guild ID.
@@ -176,6 +225,26 @@ public class TatsumakiClient {
     }
 
     /**
+     * Updates a user's points in a guild.
+     *
+     * @param guildId      The guild ID.
+     * @param userId       The user's ID.
+     * @param updateAction The type of update action.
+     * @param amount       The amount to update the user's points by.
+     * @param response     The response callback.
+     * @param error        The error callback.
+     */
+    public void updateGuildUserPoints(String guildId, String userId, UpdateAction updateAction, int amount,
+                                      Response<GuildUserPoints> response, Error error) {
+        Request<GuildUserPoints> request = new Request<>(
+                () -> restClient.putGuildUserPoints(guildId, userId, updateAction, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
      * Updates a user's score in a guild.
      *
      * @param guildId      The guild ID.
@@ -186,6 +255,26 @@ public class TatsumakiClient {
      * @param error        The error callback.
      */
     public void updateGuildUserScore(long guildId, long userId, UpdateAction updateAction, int amount,
+                                     Response<GuildUserScore> response, Error error) {
+        Request<GuildUserScore> request = new Request<>(
+                () -> restClient.putGuildUserScore(guildId, userId, updateAction, amount),
+                response::onResponse,
+                error::onError
+        );
+        asyncThreader.execute(request);
+    }
+
+    /**
+     * Updates a user's score in a guild.
+     *
+     * @param guildId      The guild ID.
+     * @param userId       The user's ID.
+     * @param updateAction The type of update action.
+     * @param amount       The amount to update the user's score by.
+     * @param response     The response callback.
+     * @param error        The error callback.
+     */
+    public void updateGuildUserScore(String guildId, String userId, UpdateAction updateAction, int amount,
                                      Response<GuildUserScore> response, Error error) {
         Request<GuildUserScore> request = new Request<>(
                 () -> restClient.putGuildUserScore(guildId, userId, updateAction, amount),
