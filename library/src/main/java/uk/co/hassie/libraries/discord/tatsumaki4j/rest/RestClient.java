@@ -35,7 +35,7 @@ import uk.co.hassie.libraries.discord.tatsumaki4j.parser.Parser;
 import java.util.Collections;
 import java.util.List;
 
-public class RestClient implements AutoCloseable {
+public class RestClient {
 
     // User Agent consts.
     private static final String UA_NAME = "Tatsumaki4J";
@@ -231,7 +231,7 @@ public class RestClient implements AutoCloseable {
     }
 
     public GuildUserScore putGuildUserScore(long guildId, long userId, UpdateAction updateAction,
-                                              int amount) throws TatsumakiException {
+                                            int amount) throws TatsumakiException {
         try {
             // Create request body.
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
@@ -267,9 +267,8 @@ public class RestClient implements AutoCloseable {
         }
     }
 
-    @Override
     public void close() {
-        // Shutdown OkHttp.
+        // Shutdown OkHttp's executor services.
         httpClient.dispatcher().executorService().shutdown();
     }
 

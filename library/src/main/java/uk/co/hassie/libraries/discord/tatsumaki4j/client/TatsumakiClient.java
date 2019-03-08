@@ -29,7 +29,7 @@ import uk.co.hassie.libraries.discord.tatsumaki4j.rest.RestClient;
 
 import java.util.List;
 
-public class TatsumakiClient implements AutoCloseable {
+public class TatsumakiClient {
 
     private final AsyncThreader asyncThreader;
     private final RestClient restClient;
@@ -198,7 +198,6 @@ public class TatsumakiClient implements AutoCloseable {
     /**
      * Closes the Tatsumaki client by shutting down the executor services.
      */
-    @Override
     public void close() {
         // Shutdown async threader and close rest client.
         asyncThreader.shutdown();
