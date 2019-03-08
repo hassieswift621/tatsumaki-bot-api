@@ -14,19 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.client;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+@FunctionalInterface
+public interface Error {
 
-sourceCompatibility = 1.8
+    void onError(Throwable throwable);
 
-repositories {
-    jcenter()
-}
-
-dependencies {
-    implementation project(':library')
 }

@@ -14,19 +14,36 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.ping;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+import java.time.Instant;
 
-sourceCompatibility = 1.8
+/**
+ * Represents a ping response.
+ */
+public class Ping {
 
-repositories {
-    jcenter()
-}
+    private final String message;
+    private final Instant timestamp;
 
-dependencies {
-    implementation project(':library')
+    public Ping(String message, Instant timestamp) {
+        this.message = message;
+        this.timestamp = timestamp;
+    }
+
+    /**
+     * @return The response message.
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     *
+     * @return The ping receive timestamp.
+     */
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
 }

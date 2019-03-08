@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.error;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+import com.google.gson.annotations.SerializedName;
 
-sourceCompatibility = 1.8
+public class TatsumakiError {
 
-repositories {
-    jcenter()
-}
+    @SerializedName("message")
+    private String message;
 
-dependencies {
-    implementation project(':library')
+    public String getMessage() {
+        return message;
+    }
+
 }

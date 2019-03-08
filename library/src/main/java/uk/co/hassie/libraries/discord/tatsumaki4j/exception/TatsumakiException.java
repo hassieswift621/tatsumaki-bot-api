@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.exception;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+public class TatsumakiException extends Exception {
 
-sourceCompatibility = 1.8
+    public TatsumakiException(String message) {
+        super("Tatsuamki API Exception - " + message);
+    }
 
-repositories {
-    jcenter()
-}
+    public TatsumakiException(String message, Throwable cause) {
+        super("Tatsumaki API Exception - " + message, cause);
+    }
 
-dependencies {
-    implementation project(':library')
 }

@@ -14,19 +14,33 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.user;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+/**
+ * Represents a user profile badge.
+ */
+public class Badge {
 
-sourceCompatibility = 1.8
+    private final String imageUrl;
+    private final String name;
 
-repositories {
-    jcenter()
-}
+    public Badge(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
 
-dependencies {
-    implementation project(':library')
+    /**
+     * @return The badge image URL.
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @return The badge name.
+     */
+    public String getName() {
+        return name;
+    }
+
 }

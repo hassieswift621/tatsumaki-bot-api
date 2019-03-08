@@ -14,19 +14,33 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.handle.user;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+/**
+ * Represents a user profile background.
+ */
+public class Background {
 
-sourceCompatibility = 1.8
+    private final String imageUrl;
+    private final String name;
 
-repositories {
-    jcenter()
-}
+    public Background(String imageUrl, String name) {
+        this.imageUrl = imageUrl;
+        this.name = name;
+    }
 
-dependencies {
-    implementation project(':library')
+    /**
+     * @return The background image URL.
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @return The name of the background.
+     */
+    public String getName() {
+        return name;
+    }
+
 }

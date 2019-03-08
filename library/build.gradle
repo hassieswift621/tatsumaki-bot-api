@@ -28,7 +28,7 @@ plugins {
 }
 apply plugin: 'com.novoda.bintray-release'
 
-group = 'uk.co.hassieswift621.libraries.discord'
+group = 'uk.co.hassie.libraries.discord'
 version = '0.6.0'
 
 sourceCompatibility = 1.8
@@ -44,8 +44,8 @@ dependencies {
 }
 
 publish {
-    userOrg = 'hassieswift621'
-    groupId = 'uk.co.hassieswift621.libraries.discord'
+    userOrg = 'hassie'
+    groupId = 'uk.co.hassie.libraries.discord'
     artifactId = 'tatsumaki4j'
     publishVersion = '0.6.0'
     desc = 'An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.'

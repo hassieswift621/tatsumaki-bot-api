@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'java'
-}
+package uk.co.hassie.libraries.discord.tatsumaki4j.rest;
 
-group 'uk.co.hassie.discord.libraries'
-version '0.6.0'
+/**
+ * Update action types.
+ */
+public enum UpdateAction {
 
-sourceCompatibility = 1.8
+    ADD("add"),
+    REMOVE("remove"),
+    SET("set");
 
-repositories {
-    jcenter()
-}
+    private final String action;
 
-dependencies {
-    implementation project(':library')
+    UpdateAction(String action) {
+        this.action = action;
+    }
+
+    @Override
+    public String toString() {
+        return action;
+    }
+
 }
