@@ -6,7 +6,7 @@ The API wrapper has all endpoints implemented: guilds, users and ping.
 
 When you create the client, by default a number of fixed threads are created, specifically CPUs/CPU cores + 1.
 You can customise this using the client builder.
-gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
+
 The client is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
 Once you are done with the client, call its close method to shutdown the executor services, which will keep your program alive.
 However, you must create a new instance of the client if you wish to make another API request after closing the client.
