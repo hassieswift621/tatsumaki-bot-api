@@ -26,11 +26,10 @@ class RateLimiter {
     private final int resetInterval; // The interval after which the rate limit resets.
 
     public RateLimiter() {
-        // We'll set the reset interval to 0.3s, in case there are some inconsistencies.
-        resetInterval = 300;
+        resetInterval = 250;
 
         // Set last request to now - reset interval to allow an instant initial request.
-        lastRequest = System.currentTimeMillis();
+        lastRequest = System.currentTimeMillis() - resetInterval;
     }
 
     public synchronized void acquire() throws InterruptedException {
