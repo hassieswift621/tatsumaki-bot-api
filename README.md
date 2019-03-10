@@ -1,4 +1,4 @@
-# Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/dev) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/335e92d087d54acd903daee641e91a45)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
+# Tatsumaki4J [![CircleCI](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/master.svg?style=svg)](https://circleci.com/gh/hassieswift621/tatsumaki4j/tree/master) [ ![Download](https://api.bintray.com/packages/hassieswift621/maven/tatsumaki4j/images/download.svg) ](https://bintray.com/hassieswift621/maven/tatsumaki4j/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd3c664d968743af8cc0b495fe19cddc)](https://www.codacy.com/app/hassieswift621/tatsumaki4j?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hassieswift621/tatsumaki4j&amp;utm_campaign=Badge_Grade)
 
 An asynchronous Java API wrapper around one of the most popular bots on Discord, Tatsumaki.
 
@@ -6,7 +6,7 @@ The API wrapper has all endpoints implemented: guilds, users and ping.
 
 When you create the client, by default a number of fixed threads are created, specifically CPUs/CPU cores + 1.
 You can customise this using the client builder.
-
+gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 The client is designed to run for the duration of your program, keeping the thread pool alive for quick async execution.
 Once you are done with the client, call its close method to shutdown the executor services, which will keep your program alive.
 However, you must create a new instance of the client if you wish to make another API request after closing the client.
@@ -14,15 +14,13 @@ However, you must create a new instance of the client if you wish to make anothe
 Note that I am not part of the Tatsumaki Bot development.
 If you have any queries about the bot or the API, please visit https://tatsumaki.xyz/
 
-How do I get an API key
------------------------
+## How do I get an API key
 To get an API key, run the following command on Tatsumaki: **t!apikey**
 
-Dependencies
-------------
-This library is available on JCenter. The latest version is 0.6.0
+## Dependencies
+This library is available on JCenter. The current release is 0.6.1
 
-Replace ``{LATEST_VERSION}`` with the latest version.
+Replace ``{LATEST_VERSION}`` with the current release.
 
 **Gradle Setup**
 ```gradle
@@ -39,8 +37,7 @@ implementation 'uk.co.hassie.libraries.discord.tatsumaki4j:{LATEST_VERSION}'
 </dependency>
 ```
 
-Tutorial
---------
+## Tutorial
 **Creating the client**
 ```java
 // Create the client with the default number of threads.
@@ -70,10 +67,11 @@ tatsumakiClient.getUser("User ID",
 // is executed.
 ```
 
-**Other endpoints**
+**Endpoints**
 - GET Guild Leaderboard: ``getGuildLeaderboard(guildId, Response<GuildLeaderboard> response, Error error)``
 - GET Guild User Stats: ``getGuildUserStats(guildId, userId, Response<GuildUserStats> response, Error error)``
 - GET Ping: ``getPing(Response<Ping> response, Error error)``
+- GET User: ``getUser(Response<TatsumakiUser> response, Error error)``
 - PUT Guild User Points: ``updateGuildUserPoints(guildId, userId, updateAction, amount, Response<GuildUserPoints> response, Error error)``
 - PUT Guild User Score: ``updateGuildUserScore(guildId, userId, updateAction, amount, Response<GuildUserScore> response, Error error)``
 
@@ -82,8 +80,7 @@ tatsumakiClient.getUser("User ID",
 tatsumakiClient.close();
 ```
 
-License
--------
+## License
 Copyright &copy;2018-2019 Hassie.
 
 Licensed under the Apache License, Version 2.0 (the "License");
